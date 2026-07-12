@@ -1,0 +1,24 @@
+<div [class]="hostClasses()" [style]="hostStyle()">
+  @if (!showPlaceholder()) {
+    <img
+      class="safe-image__img"
+      [src]="src()"
+      [alt]="alt()"
+      [style.object-fit]="objectFit()"
+      [attr.width]="widthAttr()"
+      [attr.height]="heightAttr()"
+      [attr.loading]="eager() ? 'eager' : 'lazy'"
+      [attr.fetchpriority]="eager() ? 'high' : null"
+      decoding="async"
+      (error)="onError()"
+    />
+  } @else {
+    <div class="safe-image__placeholder" role="img" [attr.aria-label]="alt()">
+      <svg lucideImage class="safe-image__placeholder-icon" aria-hidden="true"></svg>
+      <p class="safe-image__placeholder-title">{{ placeholderTitle() }}</p>
+      @if (placeholderDescription()) {
+        <p class="safe-image__placeholder-description">{{ placeholderDescription() }}</p>
+      }
+    </div>
+  }
+</div>

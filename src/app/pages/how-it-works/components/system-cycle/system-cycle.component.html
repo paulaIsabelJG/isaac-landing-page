@@ -1,0 +1,50 @@
+<section id="ciclo-sistema" class="cycle">
+  <div class="container">
+    <app-section-title
+      eyebrow="El ciclo ISAAC"
+      title="El ciclo completo de la comunicación con ISAAC"
+      description="Desde la creación del tablero hasta el seguimiento de objetivos, ISAAC conecta todas las fases del proceso comunicativo en una misma plataforma."
+      align="center"
+      maxWidth="640px"
+    />
+
+    <ol class="cycle__list">
+      @for (step of steps; track step.id) {
+        <li
+          class="cycle__item"
+          [class]="'cycle__item--' + step.accent"
+          appScrollReveal
+          [threshold]="0.2"
+        >
+          <span class="cycle__marker">
+            <svg [lucideIcon]="iconFor(step.icon)" class="cycle__marker-icon" aria-hidden="true"></svg>
+            <span class="cycle__number">{{ step.number }}</span>
+          </span>
+
+          <div class="cycle__card">
+            <h3 class="cycle__title">{{ step.title }}</h3>
+            <p class="cycle__description">{{ step.description }}</p>
+            <ul class="cycle__details">
+              @for (detail of step.details; track detail) {
+                <li>{{ detail }}</li>
+              }
+            </ul>
+          </div>
+        </li>
+      }
+
+      <li class="cycle__loop" appScrollReveal>
+        <svg lucideRepeat2 class="cycle__loop-icon" aria-hidden="true"></svg>
+        <p class="cycle__loop-text">
+          El ciclo no termina en el paso 6: los objetivos definidos vuelven a alimentar el
+          <strong>paso 2, Personalizar</strong>, para seguir adaptando el sistema.
+        </p>
+      </li>
+    </ol>
+
+    <blockquote class="cycle__highlight">
+      Analizar no es el final del proceso: los resultados sirven para volver a personalizar el
+      sistema y adaptarlo a la evolución de cada persona.
+    </blockquote>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+<section class="objectives">
+  <div class="container objectives__layout">
+    <div class="objectives__visual" appScrollReveal>
+      <span class="objectives__visual-icon" aria-hidden="true">
+        <svg lucideTarget></svg>
+      </span>
+      <app-safe-image
+        class="objectives__image"
+        src="/images/how-it-works/objectives.webp"
+        alt="Panel de definición de objetivos comunicativos en ISAAC"
+        placeholderTitle="Objetivos comunicativos"
+        placeholderDescription="Añade la imagen en public/images/how-it-works/objectives.webp"
+        rounded="lg"
+      />
+    </div>
+
+    <div class="objectives__content">
+      <app-section-title
+        eyebrow="Paso 6 · Establecer objetivos"
+        title="Del análisis a la intervención"
+        description="Los resultados pueden utilizarse para definir objetivos comunicativos, añadir observaciones y revisar la evolución de cada persona."
+        align="left"
+        maxWidth="520px"
+      />
+
+      <ul class="objectives__list">
+        @for (detail of details; track detail) {
+          <li>{{ detail }}</li>
+        }
+      </ul>
+
+      <blockquote class="objectives__highlight">
+        El objetivo no es que la persona se adapte a ISAAC, sino que ISAAC evolucione con ella.
+      </blockquote>
+    </div>
+  </div>
+</section>

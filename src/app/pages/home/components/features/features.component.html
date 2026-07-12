@@ -1,0 +1,46 @@
+<section id="features" class="features">
+  <div class="container">
+    <app-section-title
+      eyebrow="Funcionalidades"
+      title="Todo lo que necesitas, en una única plataforma"
+      description="ISAAC reúne creación de tableros, comunicación, personalización, inteligencia artificial y seguimiento sin obligar a trabajar con herramientas separadas."
+      align="center"
+      maxWidth="640px"
+    />
+
+    <div class="features__grid">
+      @for (feature of features; track feature.id; let i = $index) {
+        <button
+          type="button"
+          [class]="'features__card features__card--' + feature.accent"
+          [class.features__card--active]="isActive(feature.id)"
+          [attr.aria-pressed]="isActive(feature.id)"
+          aria-controls="feature-detail-panel"
+          appScrollReveal
+          [delay]="(i % 3) * 100"
+          (click)="selectFeature(feature.id)"
+        >
+          @if (isActive(feature.id)) {
+            <span class="features__active-indicator" aria-hidden="true">
+              <svg lucideCheck></svg>
+            </span>
+            <span class="sr-only">Funcionalidad seleccionada</span>
+          }
+
+          <span class="features__icon" aria-hidden="true">
+            <svg [lucideIcon]="iconFor(feature.icon)"></svg>
+          </span>
+
+          <span class="features__title">{{ feature.title }}</span>
+          <span class="features__description">{{ feature.shortDescription }}</span>
+
+          @if (feature.tag) {
+            <app-badge class="features__tag" [text]="feature.tag" variant="neutral" size="sm" />
+          }
+        </button>
+      }
+    </div>
+
+    <app-feature-detail [feature]="activeFeature()" />
+  </div>
+</section>

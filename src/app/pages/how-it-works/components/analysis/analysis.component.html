@@ -1,0 +1,36 @@
+<section class="analysis">
+  <div class="container analysis__layout">
+    <div class="analysis__content">
+      <app-section-title
+        eyebrow="Paso 5 · Analizar"
+        title="Transformar la actividad en información útil"
+        description="Profesionales y organizaciones pueden consultar estadísticas para comprender el uso del sistema, detectar dificultades y adaptar los recursos."
+        align="left"
+        maxWidth="520px"
+      />
+
+      <ul class="analysis__list">
+        @for (detail of details; track detail) {
+          <li>
+            <svg lucideCheck aria-hidden="true"></svg>
+            <span>{{ detail }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="analysis__visual" appScrollReveal>
+      <span class="analysis__visual-icon" aria-hidden="true">
+        <svg lucideChartPie></svg>
+      </span>
+      <app-safe-image
+        class="analysis__image"
+        src="/images/how-it-works/statistics.webp"
+        alt="Panel de estadísticas de uso de ISAAC"
+        placeholderTitle="Estadísticas de uso"
+        placeholderDescription="Añade la imagen en public/images/how-it-works/statistics.webp"
+        rounded="lg"
+      />
+    </div>
+  </div>
+</section>

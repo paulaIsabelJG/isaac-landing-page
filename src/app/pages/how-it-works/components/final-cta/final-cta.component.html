@@ -1,0 +1,22 @@
+<section class="final-cta">
+  <div class="container final-cta__inner">
+    <h2 class="final-cta__title">Cada comunicación es diferente. ISAAC también.</h2>
+    <p class="final-cta__text">
+      ISAAC combina creación de tableros, personalización, comunicación, inteligencia artificial,
+      análisis y seguimiento para adaptarse a cada persona y a quienes la acompañan.
+    </p>
+
+    <div class="final-cta__actions">
+      <app-button
+        variant="primary"
+        size="lg"
+        [icon]="arrowRightIcon"
+        iconPosition="right"
+        (click)="goToContact()"
+      >
+        Solicitar una demo
+      </app-button>
+      <app-button variant="ghost" size="lg" (click)="goToFeatures()">Ver funcionalidades</app-button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,76 @@
+// Estilos globales de ISAAC.
+// Orden de importación: tokens -> mixins -> reset -> estilos base.
+@use 'styles/tokens' as *;
+@use 'styles/mixins' as *;
+@use 'styles/reset';
+
+html {
+  background-color: $color-bg;
+}
+
+body {
+  background-color: $color-bg;
+  color: $color-text;
+  @include type-body;
+}
+
+h1 {
+  @include type-h1;
+  color: $color-text;
+}
+
+h2 {
+  @include type-h2;
+  color: $color-text;
+}
+
+h3 {
+  @include type-h3;
+  color: $color-text;
+}
+
+p {
+  @include type-body;
+  color: $color-text;
+}
+
+a {
+  color: $color-primary;
+  transition: color $duration-fast $ease-standard;
+  @include focus-visible;
+
+  &:hover {
+    color: $color-primary-dark;
+  }
+}
+
+button {
+  @include button-reset;
+  @include focus-visible;
+}
+
+main {
+  display: block;
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-text-on-primary;
+}
+
+.container {
+  @include container;
+}
+
+.section {
+  @include section-spacing;
+}
+
+.eyebrow {
+  @include type-eyebrow;
+  color: $color-primary;
+}
+
+.sr-only {
+  @include visually-hidden;
+}

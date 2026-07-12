@@ -1,0 +1,33 @@
+<section class="registration">
+  <div class="container registration__layout">
+    <app-safe-image
+      class="registration__image"
+      src="/images/how-it-works/obl-registration.webp"
+      alt="Panel de registro de interacciones OBL en ISAAC"
+      placeholderTitle="Registro de interacciones (OBL)"
+      placeholderDescription="Añade la imagen en public/images/how-it-works/obl-registration.webp"
+      rounded="lg"
+    />
+
+    <div class="registration__content">
+      <app-section-title
+        eyebrow="Paso 4 · Registrar"
+        title="Cada interacción puede aportar información"
+        description="ISAAC registra la actividad comunicativa mediante eventos OBL. El objetivo no es vigilar a la persona, sino disponer de información útil para comprender cómo utiliza el sistema."
+        align="left"
+        maxWidth="520px"
+      />
+
+      <ul class="registration__list">
+        @for (detail of details; track detail) {
+          <li>{{ detail }}</li>
+        }
+      </ul>
+
+      <div class="registration__note" appScrollReveal>
+        <svg lucideClipboardList class="registration__note-icon" aria-hidden="true"></svg>
+        <p>OBL permite registrar interacciones de forma estructurada y facilita el análisis posterior.</p>
+      </div>
+    </div>
+  </div>
+</section>

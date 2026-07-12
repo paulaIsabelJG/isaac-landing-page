@@ -1,0 +1,168 @@
+// =============================================================
+// ISAAC — Design tokens
+// Fuente única de verdad para color, tipografía, espaciado y
+// demás propiedades visuales. No poner aquí selectores ni reglas.
+// =============================================================
+
+// ---------------------------------------------------------------
+// Color — fondos
+// ---------------------------------------------------------------
+$color-bg: #fffcf7; // blanco cálido / marfil — fondo principal
+$color-bg-alt: #f4f1fc; // violáceo muy claro — fondo secundario, alterna secciones
+$color-surface: #ffffff; // superficie de tarjetas y elementos elevados
+
+// ---------------------------------------------------------------
+// Color — marca
+// ---------------------------------------------------------------
+$color-primary: #6d28d9; // morado principal — contraste ~7:1 con texto blanco, seguro para CTAs
+$color-primary-dark: #57179c; // hover/active del primario
+$color-secondary: #4f46e5; // azul violáceo secundario — contraste ~6.3:1 con texto blanco
+
+// ---------------------------------------------------------------
+// Color — acentos decorativos
+// Uso previsto: iconos, badges, fondos de tarjetas, ilustraciones.
+// No cumplen 4.5:1 con texto blanco encima: combinar siempre con
+// $color-text (oscuro) cuando actúen como fondo de un bloque.
+// ---------------------------------------------------------------
+$color-accent-coral: #f0553d;
+$color-accent-green: #4caf82;
+$color-accent-yellow: #f5b942;
+
+// ---------------------------------------------------------------
+// Color — texto
+// ---------------------------------------------------------------
+$color-text: #221c35; // texto principal — contraste ~16:1 sobre $color-bg
+$color-text-muted: #5b5670; // texto secundario — contraste ~7:1 sobre $color-bg
+$color-text-on-primary: #ffffff; // texto sobre fondos $color-primary / $color-secondary
+
+// ---------------------------------------------------------------
+// Color — bordes
+// ---------------------------------------------------------------
+$color-border: #e6e1f5;
+$color-border-strong: #d3cbef;
+
+// ---------------------------------------------------------------
+// Color — estados
+// Tonos ajustados para mantener 4.5:1 de contraste como texto/icono
+// sobre $color-bg, a diferencia de los acentos decorativos de arriba.
+// ---------------------------------------------------------------
+$color-success: #1f8a5d;
+$color-error: #c22e27;
+$color-warning: #b45309;
+
+// ---------------------------------------------------------------
+// Tipografía — familias
+// Nota: cargar "Inter" y "Nunito Sans" (Google Fonts o self-hosted)
+// en index.html; estos tokens solo declaran la pila de fuentes.
+// ---------------------------------------------------------------
+$font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Helvetica, Arial, sans-serif;
+$font-family-heading: 'Nunito Sans', 'Inter', -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+// ---------------------------------------------------------------
+// Tipografía — tamaños base (mobile). Los tamaños grandes (display,
+// h1, h2, h3, body-lg) escalan de forma fluida vía el mixin
+// fluid-type() definido en _mixins.scss; estos valores son el suelo.
+// ---------------------------------------------------------------
+$font-size-display: 2.75rem;
+$font-size-h1: 2.25rem;
+$font-size-h2: 1.875rem;
+$font-size-h3: 1.375rem;
+$font-size-body-lg: 1.0625rem;
+$font-size-body: 1rem;
+$font-size-small: 0.875rem;
+$font-size-eyebrow: 0.8125rem;
+
+// ---------------------------------------------------------------
+// Tipografía — peso, interlineado, tracking
+// ---------------------------------------------------------------
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+$line-height-tight: 1.1;
+$line-height-heading: 1.2;
+$line-height-body: 1.6;
+
+$letter-spacing-tight: -0.02em;
+$letter-spacing-eyebrow: 0.08em;
+
+// ---------------------------------------------------------------
+// Layout
+// ---------------------------------------------------------------
+$container-max-width: 1200px;
+$container-padding: clamp(1.25rem, 4vw, 3rem); // padding lateral responsive
+
+$section-padding-y: clamp(4rem, 8vw, 7rem); // espaciado vertical entre secciones
+
+$header-height-mobile: 64px;
+$header-height-desktop: 80px;
+
+// ---------------------------------------------------------------
+// Escala de espacios
+// ---------------------------------------------------------------
+$space-3xs: 0.25rem; // 4px
+$space-2xs: 0.5rem; // 8px
+$space-xs: 0.75rem; // 12px
+$space-sm: 1rem; // 16px
+$space-md: 1.5rem; // 24px
+$space-lg: 2rem; // 32px
+$space-xl: 3rem; // 48px
+$space-2xl: 4rem; // 64px
+$space-3xl: 6rem; // 96px
+$space-4xl: 8rem; // 128px
+
+// ---------------------------------------------------------------
+// Radios de borde
+// ---------------------------------------------------------------
+$radius-sm: 8px;
+$radius-md: 14px;
+$radius-lg: 20px;
+$radius-xl: 28px;
+$radius-full: 999px;
+
+// ---------------------------------------------------------------
+// Sombras
+// ---------------------------------------------------------------
+$shadow-sm: 0 1px 2px rgba(34, 28, 53, 0.06);
+$shadow-md: 0 8px 24px rgba(34, 28, 53, 0.08);
+$shadow-lg: 0 20px 48px rgba(34, 28, 53, 0.12);
+$shadow-primary: 0 12px 32px rgba(109, 40, 217, 0.25); // "glow" para CTAs primarios
+
+// ---------------------------------------------------------------
+// Animación
+// ---------------------------------------------------------------
+$duration-fast: 150ms;
+$duration-base: 250ms;
+$duration-slow: 450ms;
+
+$ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+// ---------------------------------------------------------------
+// Breakpoints (mobile-first, min-width)
+// ---------------------------------------------------------------
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1440px,
+);
+
+// ---------------------------------------------------------------
+// Z-index
+// ---------------------------------------------------------------
+$z-index: (
+  base: 0,
+  dropdown: 10,
+  sticky: 100,
+  header: 200,
+  overlay: 300,
+  modal: 400,
+  toast: 500,
+);

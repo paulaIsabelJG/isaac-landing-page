@@ -1,0 +1,48 @@
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__content">
+      <div class="footer__brand">
+        <a routerLink="/" class="footer__logo" aria-label="ISAAC — Ir al inicio">
+          <svg lucideMessageCircle class="footer__logo-icon" aria-hidden="true"></svg>
+          <span class="footer__logo-text">ISAAC</span>
+        </a>
+        <p class="footer__description">
+          Comunicación aumentativa y alternativa con pictogramas, voz e inteligencia artificial.
+        </p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Navegación del pie de página">
+        <h2 class="footer__nav-title">Navegación</h2>
+        <ul class="footer__nav-list">
+          @for (link of links; track link.target) {
+            <li>
+              <a
+                class="footer__nav-link"
+                [routerLink]="isRoute(link.target) ? link.target : ['/']"
+                [fragment]="isRoute(link.target) ? undefined : link.target.replace('#', '')"
+                (click)="onNavClick($event, link.target)"
+              >
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <nav class="footer__legal-nav" aria-label="Enlaces legales">
+        <h2 class="footer__nav-title">Legal</h2>
+        <ul class="footer__nav-list">
+          <li><a class="footer__nav-link" routerLink="/privacidad">Política de privacidad</a></li>
+          <li><a class="footer__nav-link" routerLink="/terminos">Aviso legal</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__note">Prototipo funcional en fase de validación.</p>
+      <p class="footer__meta">
+        © {{ year }} ISAAC — Trabajo Fin de Grado, Universidad Pontificia de Salamanca.
+      </p>
+    </div>
+  </div>
+</footer>

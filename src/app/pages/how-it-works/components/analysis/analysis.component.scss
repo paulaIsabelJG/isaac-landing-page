@@ -1,0 +1,80 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.analysis {
+  @include section-spacing;
+}
+
+.analysis__layout {
+  display: grid;
+  gap: $space-2xl;
+  align-items: center;
+
+  @include respond-to(lg) {
+    grid-template-columns: 1.05fr 1fr;
+  }
+}
+
+.analysis__content {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.analysis__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-2xs $space-lg;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include respond-to(sm) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: $space-2xs;
+    @include type-body;
+    color: $color-text-muted;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    color: $color-accent-coral;
+  }
+}
+
+.analysis__visual {
+  position: relative;
+}
+
+.analysis__visual-icon {
+  position: absolute;
+  top: $space-sm;
+  right: $space-sm;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: $radius-full;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-md;
+  color: $color-accent-coral;
+
+  svg {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+}
+
+.analysis__image {
+  width: 100%;
+}

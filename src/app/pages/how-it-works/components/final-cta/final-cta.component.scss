@@ -1,0 +1,48 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.final-cta {
+  @include section-spacing;
+}
+
+.final-cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-md;
+  text-align: center;
+  max-width: 720px;
+  margin-inline: auto;
+  padding: $space-2xl $space-lg;
+  border-radius: $radius-xl;
+  // Fondo claro con un leve tinte de marca: evita que los botones "ghost"
+  // (texto morado) pierdan contraste, algo que sí ocurriría sobre un
+  // degradado sólido primary/secondary.
+  background: linear-gradient(135deg, rgba($color-primary, 0.08), rgba($color-secondary, 0.1));
+  border: 1px solid $color-border;
+}
+
+.final-cta__title {
+  @include type-h2;
+  color: $color-text;
+  margin: 0;
+}
+
+.final-cta__text {
+  @include type-body-lg;
+  color: $color-text-muted;
+  margin: 0;
+  max-width: 52ch;
+}
+
+.final-cta__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  margin-top: $space-sm;
+
+  @include respond-to(sm) {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,86 @@
+@if (displayedFeature(); as feature) {
+  <div
+    id="feature-detail-panel"
+    [class]="'feature-detail feature-detail--' + feature.accent"
+    [class.feature-detail--transitioning]="isTransitioning()"
+    role="region"
+    [attr.aria-label]="feature.title"
+  >
+    <div class="feature-detail__grid">
+      <header class="feature-detail__header">
+        <div class="feature-detail__heading-row">
+          <span class="feature-detail__icon" aria-hidden="true">
+            <svg [lucideIcon]="iconFor(feature.icon)"></svg>
+          </span>
+          @if (feature.tag) {
+            <app-badge [text]="feature.tag" variant="neutral" size="sm" />
+          }
+        </div>
+        <h3 class="feature-detail__title">{{ feature.title }}</h3>
+        <p class="feature-detail__description">{{ feature.longDescription }}</p>
+      </header>
+
+      <div class="feature-detail__images">
+        <app-safe-image
+          class="feature-detail__image-main"
+          [src]="feature.imageSrc"
+          [alt]="feature.imageAlt"
+          [placeholderTitle]="feature.title"
+          [placeholderDescription]="'Añade la imagen en public' + feature.imageSrc"
+          aspectRatio="16 / 10"
+          rounded="lg"
+        />
+        @if (feature.secondaryImageSrc) {
+          <app-safe-image
+            class="feature-detail__image-secondary"
+            [src]="feature.secondaryImageSrc"
+            [alt]="feature.secondaryImageAlt ?? feature.title"
+            [placeholderTitle]="feature.title"
+            [placeholderDescription]="'Añade la imagen en public' + feature.secondaryImageSrc"
+            aspectRatio="4 / 3"
+            rounded="lg"
+          />
+        }
+      </div>
+
+      <div class="feature-detail__bullets-block">
+        <h4 class="feature-detail__block-title">Capacidades</h4>
+        <ul class="feature-detail__bullets">
+          @for (bullet of feature.bullets; track bullet) {
+            <li>{{ bullet }}</li>
+          }
+        </ul>
+      </div>
+
+      @if (feature.workflow && feature.workflow.length > 0) {
+        <div class="feature-detail__workflow-block">
+          <h4 class="feature-detail__block-title">Flujo de uso</h4>
+          <ol class="feature-detail__workflow">
+            @for (step of feature.workflow; track step) {
+              <li>{{ step }}</li>
+            }
+          </ol>
+        </div>
+      }
+
+      @if (feature.highlight) {
+        <blockquote class="feature-detail__highlight">{{ feature.highlight }}</blockquote>
+      }
+
+      <div class="feature-detail__footer">
+        @if (feature.technicalNote) {
+          <details class="feature-detail__note">
+            <summary>Nota técnica</summary>
+            <p>{{ feature.technicalNote }}</p>
+          </details>
+        }
+
+        @if (feature.linkLabel && feature.linkTarget) {
+          <app-button variant="secondary" size="md" [routerLink]="[feature.linkTarget]">
+            {{ feature.linkLabel }}
+          </app-button>
+        }
+      </div>
+    </div>
+  </div>
+}

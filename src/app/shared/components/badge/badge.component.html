@@ -1,0 +1,6 @@
+<span [class]="classes()">
+  @if (icon(); as ic) {
+    <svg class="badge__icon" [lucideIcon]="ic" aria-hidden="true"></svg>
+  }
+  <span class="badge__text">{{ text() }}</span>
+</span>

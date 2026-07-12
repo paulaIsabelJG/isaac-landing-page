@@ -1,0 +1,37 @@
+<section class="practical-example">
+  <div class="container">
+    <app-section-title
+      eyebrow="Ejemplo ilustrativo"
+      title="Un mismo objetivo, menos esfuerzo"
+      description="Caso: pedir una hamburguesa para mañana. La comparación siguiente es un ejemplo ilustrativo de navegación entre un SAAC tradicional por categorías e ISAAC; no representa un resultado clínico ni una métrica validada."
+      align="center"
+      maxWidth="680px"
+    />
+
+    <div class="practical-example__comparison">
+      <article class="practical-example__card practical-example__card--traditional" appScrollReveal>
+        <h3 class="practical-example__card-title">SAAC tradicional</h3>
+        <p class="practical-example__card-subtitle">Navegación por categorías, paso a paso</p>
+        <ol class="practical-example__steps">
+          @for (step of traditionalSteps; track step) {
+            <li>{{ step }}</li>
+          }
+        </ol>
+      </article>
+
+      <div class="practical-example__divider" aria-hidden="true">
+        <svg lucideArrowRight></svg>
+      </div>
+
+      <article class="practical-example__card practical-example__card--isaac" appScrollReveal [delay]="120">
+        <h3 class="practical-example__card-title">Con ISAAC</h3>
+        <p class="practical-example__card-subtitle">Conceptos principales y sugerencias</p>
+        <ol class="practical-example__steps">
+          @for (step of isaacSteps; track step) {
+            <li>{{ step }}</li>
+          }
+        </ol>
+      </article>
+    </div>
+  </div>
+</section>

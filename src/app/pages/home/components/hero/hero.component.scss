@@ -1,0 +1,378 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// ---------------------------------------------------------------
+// Entradas y bucles decorativos.
+// Cada elemento con animación infinita anima una única propiedad
+// (opacity para la entrada, transform para el bucle) para poder
+// combinarlas sin que se pisen. El reset global ya neutraliza todo
+// esto bajo prefers-reduced-motion (duración casi nula, 1 iteración).
+// ---------------------------------------------------------------
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes hero-wave-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes hero-blob-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -16px) scale(1.06);
+  }
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: $space-2xl $space-3xl;
+}
+
+// ---------------------------------------------------------------
+// Fondo: formas orgánicas con degradado, contenidas y difuminadas.
+// ---------------------------------------------------------------
+.hero__decoration {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.45;
+  animation: hero-blob-drift 16s ease-in-out infinite;
+}
+
+.hero__blob--primary {
+  top: -10%;
+  right: -5%;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, $color-primary, transparent 70%);
+}
+
+.hero__blob--coral {
+  bottom: -15%;
+  left: -8%;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, $color-accent-coral, transparent 70%);
+  animation-duration: 19s;
+  animation-delay: -4s;
+}
+
+.hero__blob--secondary {
+  display: none;
+  top: 30%;
+  left: 35%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, $color-secondary, transparent 70%);
+  opacity: 0.3;
+  animation-duration: 14s;
+  animation-delay: -8s;
+
+  // Tercer blob: solo en escritorio amplio, para no saturar tablet/móvil.
+  @include respond-to(lg) {
+    display: block;
+  }
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: $space-2xl;
+  align-items: center;
+
+  @include respond-to(lg) {
+    grid-template-columns: 1.05fr 1fr;
+    gap: $space-xl;
+  }
+}
+
+// ---------------------------------------------------------------
+// Columna de texto
+// ---------------------------------------------------------------
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-md;
+  text-align: center;
+  animation: hero-fade-up 0.7s $ease-out both;
+
+  @include respond-to(lg) {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.hero__eyebrow {
+  margin: 0;
+}
+
+.hero__title {
+  @include type-display;
+  color: $color-text;
+  margin: 0;
+  max-width: 20ch;
+}
+
+.hero__subtitle {
+  @include type-body-lg;
+  color: $color-text-muted;
+  margin: 0;
+  max-width: 46ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  margin-top: $space-xs;
+
+  @include respond-to(sm) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @include respond-to(lg) {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+.hero__trust {
+  @include type-small;
+  color: $color-text-muted;
+  margin: $space-xs 0 0;
+}
+
+.hero__badge {
+  margin-top: $space-2xs;
+}
+
+// ---------------------------------------------------------------
+// Columna visual
+// ---------------------------------------------------------------
+.hero__visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: $space-lg;
+  animation: hero-fade-up 0.7s $ease-out 0.15s both;
+}
+
+.hero__mockup {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  padding: $space-sm;
+}
+
+.hero__mockup-bar {
+  display: flex;
+  gap: $space-3xs;
+  padding: $space-2xs $space-2xs $space-sm;
+
+  span {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: $radius-full;
+    background-color: $color-border-strong;
+
+    &:first-child {
+      background-color: $color-accent-coral;
+    }
+
+    &:nth-child(2) {
+      background-color: $color-accent-yellow;
+    }
+
+    &:last-child {
+      background-color: $color-accent-green;
+    }
+  }
+}
+
+.hero__mockup-image {
+  display: block;
+}
+
+// Tarjeta flotante "Predicción IA", superpuesta a la esquina del mockup.
+.hero__floating-card {
+  position: absolute;
+  top: $space-md;
+  right: -$space-md;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-3xs;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-full;
+  padding: $space-2xs $space-sm;
+  box-shadow: $shadow-md;
+  font-size: $font-size-small;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  animation:
+    hero-fade-in 0.5s $ease-out 0.5s both,
+    hero-float 6s ease-in-out 1.2s infinite;
+
+  @include respond-to(md) {
+    right: -$space-lg;
+  }
+}
+
+.hero__floating-icon {
+  width: 1rem;
+  height: 1rem;
+  color: $color-primary;
+}
+
+// Banda con la frase de ejemplo, superpuesta al borde inferior del mockup.
+.hero__phrase-band {
+  position: absolute;
+  left: $space-md;
+  right: $space-md;
+  bottom: -$space-lg;
+  display: flex;
+  align-items: center;
+  gap: $space-2xs;
+  background-color: $color-text;
+  color: $color-bg;
+  border-radius: $radius-lg;
+  padding: $space-sm $space-md;
+  box-shadow: $shadow-md;
+  font-size: $font-size-small;
+  font-weight: $font-weight-medium;
+  animation:
+    hero-fade-in 0.5s $ease-out 0.65s both,
+    hero-float 7s ease-in-out 1.5s infinite;
+}
+
+.hero__phrase-icon {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: $color-accent-yellow;
+}
+
+.hero__waves {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-inline-start: auto;
+
+  i {
+    display: block;
+    width: 2px;
+    height: 0.75rem;
+    border-radius: $radius-full;
+    background-color: rgba($color-bg, 0.7);
+    animation: hero-wave-pulse 1.1s ease-in-out infinite;
+
+    &:nth-child(1) {
+      animation-delay: -0.9s;
+    }
+    &:nth-child(2) {
+      animation-delay: -0.6s;
+    }
+    &:nth-child(3) {
+      animation-delay: -0.3s;
+    }
+    &:nth-child(4) {
+      animation-delay: -0.75s;
+    }
+    &:nth-child(5) {
+      animation-delay: -0.45s;
+    }
+  }
+}
+
+// Chips decorativos flotantes (pictogramas / bocadillos), solo en escritorio.
+.hero__chip {
+  display: none;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: $radius-lg;
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-sm;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  @include respond-to(md) {
+    display: inline-flex;
+  }
+}
+
+.hero__chip--a {
+  top: -$space-sm;
+  left: $space-lg;
+  color: $color-primary;
+  animation:
+    hero-fade-in 0.5s $ease-out 0.75s both,
+    hero-float 5.5s ease-in-out 1.6s infinite;
+}
+
+.hero__chip--b {
+  bottom: $space-2xl;
+  right: -$space-sm;
+  color: $color-accent-coral;
+  animation:
+    hero-fade-in 0.5s $ease-out 0.85s both,
+    hero-float 6.5s ease-in-out 1.8s infinite;
+}

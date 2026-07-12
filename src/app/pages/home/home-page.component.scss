@@ -1,0 +1,12 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// El header es position:fixed; reservamos su altura para que el contenido
+// de la página no arranque oculto debajo de él.
+.home-page {
+  padding-top: $header-height-mobile;
+
+  @include respond-to(md) {
+    padding-top: $header-height-desktop;
+  }
+}

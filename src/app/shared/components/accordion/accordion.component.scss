@@ -1,0 +1,67 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion__item {
+  border-bottom: 1px solid $color-border;
+}
+
+.accordion__heading {
+  margin: 0;
+}
+
+.accordion__trigger {
+  @include button-reset;
+  @include focus-visible;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+  width: 100%;
+  padding-block: $space-md;
+  text-align: left;
+  font-family: $font-family-heading;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-body-lg;
+  color: $color-text;
+}
+
+.accordion__chevron {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: $color-primary;
+  transition: transform $duration-base $ease-standard;
+}
+
+.accordion__chevron--open {
+  transform: rotate(180deg);
+}
+
+// Truco de animación de altura con CSS grid: no requiere conocer la
+// altura del contenido y respeta prefers-reduced-motion (ver _reset.scss).
+.accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows $duration-base $ease-standard;
+}
+
+.accordion__panel--open {
+  grid-template-rows: 1fr;
+}
+
+.accordion__panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.accordion__answer {
+  @include type-body;
+  color: $color-text-muted;
+  padding-bottom: $space-md;
+  margin: 0;
+}

@@ -1,0 +1,105 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.board-creation {
+  @include section-spacing;
+}
+
+.board-creation__blocks {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+  margin-top: $space-2xl;
+}
+
+.board-creation__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-lg;
+
+  @include respond-to(lg) {
+    flex-direction: row;
+    gap: $space-2xl;
+  }
+}
+
+.board-creation__block--reverse {
+  @include respond-to(lg) {
+    flex-direction: row-reverse;
+  }
+}
+
+.board-creation__image {
+  width: 100%;
+
+  @include respond-to(lg) {
+    flex: 1;
+  }
+}
+
+.board-creation__block-content {
+  width: 100%;
+
+  @include respond-to(lg) {
+    flex: 1;
+  }
+}
+
+.board-creation__block-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: $radius-md;
+  margin-bottom: $space-sm;
+
+  svg {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+
+  &--primary {
+    background-color: rgba($color-primary, 0.12);
+    color: $color-primary;
+  }
+
+  &--secondary {
+    background-color: rgba($color-secondary, 0.12);
+    color: $color-secondary;
+  }
+}
+
+.board-creation__block-title {
+  @include type-h3;
+  color: $color-text;
+  margin: 0 0 $space-sm;
+}
+
+.board-creation__block-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xs;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    @include type-body;
+    color: $color-text-muted;
+    padding-left: $space-md;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 6px;
+      height: 6px;
+      border-radius: $radius-full;
+      background-color: $color-primary;
+    }
+  }
+}

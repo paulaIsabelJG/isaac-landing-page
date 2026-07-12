@@ -1,0 +1,217 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+@keyframes process-hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes process-hero-blob-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-18px, 14px) scale(1.05);
+  }
+}
+
+.process-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: $space-2xl $space-3xl;
+}
+
+.process-hero__decoration {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.process-hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+  animation: process-hero-blob-drift 17s ease-in-out infinite;
+}
+
+.process-hero__blob--primary {
+  top: -12%;
+  left: -6%;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, $color-secondary, transparent 70%);
+}
+
+.process-hero__blob--coral {
+  bottom: -18%;
+  right: -8%;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, $color-accent-coral, transparent 70%);
+  animation-duration: 20s;
+  animation-delay: -6s;
+}
+
+.process-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: $space-2xl;
+  align-items: center;
+
+  @include respond-to(lg) {
+    grid-template-columns: 1.05fr 1fr;
+    gap: $space-xl;
+  }
+}
+
+.process-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-md;
+  text-align: center;
+  animation: process-hero-fade-up 0.7s $ease-out both;
+
+  @include respond-to(lg) {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.process-hero__title {
+  @include type-display;
+  color: $color-text;
+  margin: 0;
+  max-width: 22ch;
+}
+
+.process-hero__description {
+  @include type-body-lg;
+  color: $color-text-muted;
+  margin: 0;
+  max-width: 48ch;
+}
+
+.process-hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  margin-top: $space-xs;
+
+  @include respond-to(sm) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @include respond-to(lg) {
+    align-items: flex-start;
+  }
+}
+
+.process-hero__badge {
+  margin-top: $space-2xs;
+}
+
+.process-hero__visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-lg;
+  padding: $space-lg;
+  animation: process-hero-fade-up 0.7s $ease-out 0.15s both;
+}
+
+.process-hero__mockup {
+  width: 100%;
+  max-width: 420px;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  padding: $space-sm;
+}
+
+.process-hero__mockup-bar {
+  display: flex;
+  gap: $space-3xs;
+  padding: $space-2xs $space-2xs $space-sm;
+
+  span {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: $radius-full;
+    background-color: $color-border-strong;
+
+    &:first-child {
+      background-color: $color-accent-coral;
+    }
+    &:nth-child(2) {
+      background-color: $color-accent-yellow;
+    }
+    &:last-child {
+      background-color: $color-accent-green;
+    }
+  }
+}
+
+// Mini "stepper" que anticipa el ciclo de 6 pasos desarrollado más abajo:
+// una línea de fondo conecta los puntos, coherente con la sección del ciclo.
+.process-hero__stepper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: $color-border;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+}
+
+.process-hero__stepper-dot {
+  position: relative;
+  z-index: 1;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: $radius-full;
+  background-color: $color-border-strong;
+
+  &--primary {
+    background-color: $color-primary;
+  }
+  &--secondary {
+    background-color: $color-secondary;
+  }
+  &--green {
+    background-color: $color-accent-green;
+  }
+  &--yellow {
+    background-color: $color-accent-yellow;
+  }
+  &--coral {
+    background-color: $color-accent-coral;
+  }
+}

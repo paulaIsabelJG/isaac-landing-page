@@ -1,0 +1,63 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-3xs;
+  border-radius: $radius-full;
+  font-family: $font-family-body;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+// Tamaños
+.badge--sm {
+  padding: $space-3xs $space-xs;
+  font-size: 0.75rem;
+  line-height: 1.4;
+
+  .badge__icon {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+}
+
+.badge--md {
+  padding: $space-3xs $space-sm;
+  font-size: $font-size-small;
+  line-height: 1.4;
+
+  .badge__icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+// Variantes — fondos muy suaves con texto en la propia tinta de marca,
+// garantizando contraste accesible (el fondo es casi blanco).
+.badge--primary {
+  background-color: rgba($color-primary, 0.12);
+  color: $color-primary-dark;
+}
+
+.badge--secondary {
+  background-color: rgba($color-secondary, 0.12);
+  color: $color-secondary;
+}
+
+.badge--success {
+  background-color: rgba($color-success, 0.12);
+  color: $color-success;
+}
+
+.badge--neutral {
+  background-color: $color-bg-alt;
+  color: $color-text-muted;
+}
+
+.badge__icon {
+  flex-shrink: 0;
+  color: currentColor;
+}

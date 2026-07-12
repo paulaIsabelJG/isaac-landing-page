@@ -1,0 +1,51 @@
+<section class="communication">
+  <div class="container communication__layout">
+    <div class="communication__content">
+      <app-section-title
+        eyebrow="Paso 3 · Comunicar"
+        title="Construir y expresar un mensaje"
+        description="Durante una sesión, la persona selecciona pictogramas, construye una frase, navega entre tableros y reproduce el mensaje mediante voz."
+        align="left"
+        maxWidth="520px"
+      />
+
+      <ol class="communication__sequence" aria-label="Secuencia de pictogramas seleccionados">
+        @for (word of sequence; track word; let last = $last) {
+          <li class="communication__chip">{{ word }}</li>
+          @if (!last) {
+            <li class="communication__arrow" aria-hidden="true">
+              <svg lucideArrowRight></svg>
+            </li>
+          }
+        }
+      </ol>
+
+      <p class="communication__result">
+        <svg lucideVolume2 class="communication__result-icon" aria-hidden="true"></svg>
+        <span>“Mañana quiero comer una hamburguesa.”</span>
+      </p>
+
+      <ol class="communication__flow">
+        @for (step of flowSteps; track step; let i = $index) {
+          <li>
+            <span class="communication__flow-number" aria-hidden="true">{{ i + 1 }}</span>
+            {{ step }}
+          </li>
+        }
+      </ol>
+
+      <blockquote class="communication__highlight" appScrollReveal>
+        La intención comunicativa siempre pertenece a la persona.
+      </blockquote>
+    </div>
+
+    <app-safe-image
+      class="communication__image"
+      src="/images/how-it-works/communicator.webp"
+      alt="Persona construyendo una frase con pictogramas en el comunicador ISAAC"
+      placeholderTitle="Comunicador de ISAAC"
+      placeholderDescription="Añade la imagen en public/images/how-it-works/communicator.webp"
+      rounded="lg"
+    />
+  </div>
+</section>

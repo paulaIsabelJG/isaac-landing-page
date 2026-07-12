@@ -1,0 +1,48 @@
+<section id="audiences" class="audiences">
+  <div class="container">
+    <app-section-title
+      eyebrow="Para quién"
+      title="Una plataforma, diferentes formas de acompañar la comunicación"
+      description="ISAAC ofrece una experiencia adaptada a la persona que comunica y herramientas específicas para familiares, profesionales y organizaciones."
+      align="center"
+      maxWidth="640px"
+    />
+
+    <div class="audiences__grid">
+      @for (audience of audiences; track audience.id; let i = $index) {
+        <button
+          type="button"
+          [class]="'audiences__card audiences__card--' + audience.accent"
+          [class.audiences__card--active]="isActive(audience.id)"
+          [attr.aria-pressed]="isActive(audience.id)"
+          aria-controls="audience-detail-panel"
+          appScrollReveal
+          [delay]="i * 80"
+          (click)="selectAudience(audience.id)"
+        >
+          @if (isActive(audience.id)) {
+            <span class="audiences__active-indicator" aria-hidden="true">
+              <svg lucideCheck></svg>
+            </span>
+            <span class="sr-only">Perfil seleccionado</span>
+          }
+
+          <span class="audiences__icon" aria-hidden="true">
+            <svg [lucideIcon]="iconFor(audience.icon)"></svg>
+          </span>
+
+          <span class="audiences__title">{{ audience.shortTitle }}</span>
+          <span class="audiences__description">{{ audience.shortDescription }}</span>
+        </button>
+      }
+    </div>
+
+    <app-audience-detail [audience]="activeAudience()" />
+
+    <div class="audiences__cta">
+      <app-button variant="ghost" size="md" [routerLink]="['/como-funciona']">
+        Descubre cómo funciona
+      </app-button>
+    </div>
+  </div>
+</section>

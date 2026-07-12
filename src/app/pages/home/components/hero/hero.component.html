@@ -1,0 +1,82 @@
+<section id="hero" class="hero">
+  <div class="hero__decoration" aria-hidden="true">
+    <span class="hero__blob hero__blob--primary"></span>
+    <span class="hero__blob hero__blob--coral"></span>
+    <span class="hero__blob hero__blob--secondary"></span>
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <p class="eyebrow hero__eyebrow">Comunicación aumentativa inteligente</p>
+
+      <h1 class="hero__title">Comunicar debería ser más fácil</h1>
+
+      <p class="hero__subtitle">
+        ISAAC utiliza pictogramas, voz e inteligencia artificial para ayudar a cada persona a
+        expresarse de forma más rápida, natural y personalizada.
+      </p>
+
+      <div class="hero__actions">
+        <app-button
+          variant="primary"
+          size="lg"
+          [icon]="arrowRightIcon"
+          iconPosition="right"
+          (click)="scrollToContact()"
+        >
+          Solicitar una demo
+        </app-button>
+        <app-button variant="ghost" size="lg" [routerLink]="['/como-funciona']">
+          Ver cómo funciona
+        </app-button>
+      </div>
+
+      <p class="hero__trust">Pensado para personas, familias, profesionales y organizaciones</p>
+
+      <app-badge
+        class="hero__badge"
+        text="Finalista Santander X 2026"
+        variant="secondary"
+        size="md"
+        [icon]="awardIcon"
+      />
+    </div>
+
+    <div class="hero__visual">
+      <span class="hero__chip hero__chip--a" aria-hidden="true">
+        <svg lucideMessageCircle></svg>
+      </span>
+      <span class="hero__chip hero__chip--b" aria-hidden="true">
+        <svg lucideSparkles></svg>
+      </span>
+
+      <div class="hero__mockup">
+        <div class="hero__mockup-bar" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <app-safe-image
+          class="hero__mockup-image"
+          src="/images/hero/isaac-app.webp"
+          alt="Interfaz principal del comunicador ISAAC"
+          placeholderTitle="Captura principal del comunicador ISAAC"
+          placeholderDescription="Añade la imagen en public/images/hero/isaac-app.webp"
+          [eager]="true"
+          rounded="lg"
+        />
+
+        <div class="hero__floating-card" aria-hidden="true">
+          <svg lucideSparkles class="hero__floating-icon"></svg>
+          <span>Predicción IA</span>
+        </div>
+
+        <div class="hero__phrase-band" aria-hidden="true">
+          <svg lucideMessageCircle class="hero__phrase-icon"></svg>
+          <span>“Mañana quiero comer una hamburguesa”</span>
+          <span class="hero__waves">
+            <i></i><i></i><i></i><i></i><i></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

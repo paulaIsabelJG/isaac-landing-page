@@ -1,0 +1,57 @@
+<section class="board-creation">
+  <div class="container">
+    <app-section-title
+      eyebrow="Paso 1 · Crear o importar"
+      title="Todo empieza con un tablero"
+      description="ISAAC permite crear tableros desde cero o importar tableros compatibles en formato OBZ. De esta forma, los profesionales pueden construir nuevos recursos o continuar trabajando con materiales existentes."
+      align="center"
+      maxWidth="680px"
+    />
+
+    <div class="board-creation__blocks">
+      <article class="board-creation__block" appScrollReveal>
+        <app-safe-image
+          class="board-creation__image"
+          src="/images/how-it-works/create-board.webp"
+          alt="Editor de creación de un tablero de comunicación en ISAAC"
+          placeholderTitle="Creación de tableros"
+          placeholderDescription="Añade la imagen en public/images/how-it-works/create-board.webp"
+          rounded="lg"
+        />
+        <div class="board-creation__block-content">
+          <span class="board-creation__block-icon board-creation__block-icon--primary">
+            <svg lucideFilePlus2 aria-hidden="true"></svg>
+          </span>
+          <h3 class="board-creation__block-title">Crear</h3>
+          <ul class="board-creation__block-list">
+            @for (detail of createDetails; track detail) {
+              <li>{{ detail }}</li>
+            }
+          </ul>
+        </div>
+      </article>
+
+      <article class="board-creation__block board-creation__block--reverse" appScrollReveal [delay]="120">
+        <app-safe-image
+          class="board-creation__image"
+          src="/images/how-it-works/import-obz.webp"
+          alt="Panel de importación de un archivo OBZ en ISAAC"
+          placeholderTitle="Importación de archivos OBZ"
+          placeholderDescription="Añade la imagen en public/images/how-it-works/import-obz.webp"
+          rounded="lg"
+        />
+        <div class="board-creation__block-content">
+          <span class="board-creation__block-icon board-creation__block-icon--secondary">
+            <svg lucideUpload aria-hidden="true"></svg>
+          </span>
+          <h3 class="board-creation__block-title">Importar</h3>
+          <ul class="board-creation__block-list">
+            @for (detail of importDetails; track detail) {
+              <li>{{ detail }}</li>
+            }
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

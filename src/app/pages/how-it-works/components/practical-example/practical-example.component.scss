@@ -1,0 +1,92 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.practical-example {
+  @include section-spacing;
+}
+
+.practical-example__comparison {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-lg;
+  align-items: start;
+  margin-top: $space-2xl;
+
+  @include respond-to(lg) {
+    grid-template-columns: 1fr auto 1fr;
+    gap: $space-xl;
+  }
+}
+
+.practical-example__card {
+  @include card-base;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xs;
+}
+
+.practical-example__card--traditional {
+  background-color: $color-bg-alt;
+  border-color: $color-border;
+}
+
+.practical-example__card--isaac {
+  background-color: $color-surface;
+  border: 1px solid $color-primary;
+  box-shadow: $shadow-md;
+}
+
+.practical-example__card-title {
+  @include type-h3;
+  color: $color-text;
+  margin: 0;
+}
+
+.practical-example__card--isaac .practical-example__card-title {
+  color: $color-primary;
+}
+
+.practical-example__card-subtitle {
+  @include type-small;
+  color: $color-text-muted;
+  margin: 0 0 $space-xs;
+}
+
+.practical-example__steps {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xs;
+  margin: 0;
+  padding-left: 1.25rem;
+
+  li {
+    @include type-small;
+    color: $color-text-muted;
+  }
+}
+
+.practical-example__card--isaac .practical-example__steps li {
+  color: $color-text;
+  font-weight: $font-weight-medium;
+}
+
+.practical-example__divider {
+  display: none;
+
+  @include respond-to(lg) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: $radius-full;
+    background-color: $color-primary;
+    color: $color-text-on-primary;
+
+    svg {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+  }
+}

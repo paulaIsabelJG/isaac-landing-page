@@ -1,0 +1,56 @@
+<section class="process-hero">
+  <div class="process-hero__decoration" aria-hidden="true">
+    <span class="process-hero__blob process-hero__blob--primary"></span>
+    <span class="process-hero__blob process-hero__blob--coral"></span>
+  </div>
+
+  <div class="container process-hero__inner">
+    <div class="process-hero__content">
+      <p class="eyebrow">Cómo funciona</p>
+
+      <h1 class="process-hero__title">Así funciona ISAAC, de principio a fin</h1>
+
+      <p class="process-hero__description">
+        ISAAC conecta la creación de tableros, la comunicación, el análisis y el seguimiento de
+        objetivos en una única plataforma adaptada a cada persona.
+      </p>
+
+      <div class="process-hero__actions">
+        <app-button variant="primary" size="lg" [icon]="arrowRightIcon" iconPosition="right" (click)="goToContact()">
+          Solicitar una demo
+        </app-button>
+        <app-button variant="ghost" size="lg" (click)="scrollToCycle()">Ver el ciclo</app-button>
+      </div>
+
+      <app-badge
+        class="process-hero__badge"
+        text="Crear · Personalizar · Comunicar · Registrar · Analizar · Mejorar"
+        variant="secondary"
+        size="md"
+        [icon]="repeatIcon"
+      />
+    </div>
+
+    <div class="process-hero__visual">
+      <div class="process-hero__mockup">
+        <div class="process-hero__mockup-bar" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <app-safe-image
+          src="/images/how-it-works/overview.webp"
+          alt="Resumen visual del ciclo de funcionamiento de ISAAC"
+          placeholderTitle="Vista general del funcionamiento de ISAAC"
+          placeholderDescription="Añade la imagen en public/images/how-it-works/overview.webp"
+          [eager]="true"
+          rounded="lg"
+        />
+      </div>
+
+      <ol class="process-hero__stepper" aria-hidden="true">
+        @for (step of steps; track step.id) {
+          <li class="process-hero__stepper-dot" [class]="'process-hero__stepper-dot--' + step.accent"></li>
+        }
+      </ol>
+    </div>
+  </div>
+</section>

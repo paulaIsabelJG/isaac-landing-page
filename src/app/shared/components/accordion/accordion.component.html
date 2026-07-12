@@ -1,0 +1,39 @@
+<div class="accordion">
+  @for (item of items(); track item.id; let i = $index) {
+    <div class="accordion__item">
+      <h3 class="accordion__heading">
+        <button
+          #headerButton
+          type="button"
+          class="accordion__trigger"
+          [id]="instanceId + '-header-' + item.id"
+          [attr.aria-expanded]="isExpanded(item.id)"
+          [attr.aria-controls]="instanceId + '-panel-' + item.id"
+          (click)="toggle(item.id)"
+          (keydown)="onKeydown($event, i)"
+        >
+          <span class="accordion__question">{{ item.question }}</span>
+          <svg
+            lucideChevronDown
+            class="accordion__chevron"
+            [class.accordion__chevron--open]="isExpanded(item.id)"
+            aria-hidden="true"
+          ></svg>
+        </button>
+      </h3>
+
+      <div
+        class="accordion__panel"
+        [class.accordion__panel--open]="isExpanded(item.id)"
+        [id]="instanceId + '-panel-' + item.id"
+        [attr.aria-labelledby]="instanceId + '-header-' + item.id"
+        [attr.inert]="isExpanded(item.id) ? null : ''"
+        role="region"
+      >
+        <div class="accordion__panel-inner">
+          <p class="accordion__answer">{{ item.answer }}</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>

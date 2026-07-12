@@ -1,0 +1,66 @@
+@if (displayedAudience(); as audience) {
+  <div
+    id="audience-detail-panel"
+    [class]="'audience-detail audience-detail--' + audience.accent"
+    [class.audience-detail--transitioning]="isTransitioning()"
+    role="region"
+    [attr.aria-label]="audience.shortTitle"
+  >
+    <div class="audience-detail__grid">
+      <header class="audience-detail__header">
+        <span class="audience-detail__icon" aria-hidden="true">
+          <svg [lucideIcon]="iconFor(audience.icon)"></svg>
+        </span>
+        <h3 class="audience-detail__title">{{ audience.title }}</h3>
+        <p class="audience-detail__description">{{ audience.longDescription }}</p>
+      </header>
+
+      <app-safe-image
+        class="audience-detail__image"
+        [src]="audience.imageSrc"
+        [alt]="audience.imageAlt"
+        [placeholderTitle]="audience.shortTitle"
+        [placeholderDescription]="'Añade la imagen en public' + audience.imageSrc"
+        aspectRatio="4 / 3"
+        rounded="lg"
+      />
+
+      <div class="audience-detail__lists">
+        <div class="audience-detail__list-block">
+          <h4 class="audience-detail__block-title">Qué necesita</h4>
+          <ul class="audience-detail__list">
+            @for (need of audience.needs; track need) {
+              <li>{{ need }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="audience-detail__list-block">
+          <h4 class="audience-detail__block-title">Qué puede hacer con ISAAC</h4>
+          <ul class="audience-detail__list">
+            @for (capability of audience.capabilities; track capability) {
+              <li>{{ capability }}</li>
+            }
+          </ul>
+        </div>
+
+        @if (audience.examples && audience.examples.length > 0) {
+          <div class="audience-detail__examples">
+            <h4 class="audience-detail__block-title">Algunos ámbitos habituales</h4>
+            <ul class="audience-detail__example-list">
+              @for (example of audience.examples; track example) {
+                <li>{{ example }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+
+      <blockquote class="audience-detail__highlight">{{ audience.highlight }}</blockquote>
+
+      @if (audience.permissionsNote) {
+        <p class="audience-detail__permissions">{{ audience.permissionsNote }}</p>
+      }
+    </div>
+  </div>
+}

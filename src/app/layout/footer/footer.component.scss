@@ -1,0 +1,108 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// Fondo oscuro deliberado: marca el final de página con contraste fuerte
+// frente al resto de la landing, en lugar de repetir el marfil claro.
+.footer {
+  background-color: $color-text;
+  color: rgba($color-bg, 0.72);
+}
+
+.footer__inner {
+  @include section-spacing;
+  padding-block-end: $space-lg;
+}
+
+.footer__content {
+  display: grid;
+  gap: $space-xl;
+  padding-bottom: $space-xl;
+
+  @include respond-to(md) {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: $space-lg;
+  }
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  max-width: 320px;
+}
+
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-3xs;
+  width: fit-content;
+  color: $color-bg;
+  font-family: $font-family-heading;
+  font-weight: $font-weight-extrabold;
+  font-size: 1.25rem;
+  @include focus-visible;
+}
+
+.footer__logo-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $color-accent-yellow;
+}
+
+.footer__description {
+  @include type-small;
+  color: rgba($color-bg, 0.72);
+  margin: 0;
+}
+
+.footer__nav-title {
+  @include type-eyebrow;
+  color: rgba($color-bg, 0.5);
+  margin: 0 0 $space-sm;
+}
+
+.footer__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xs;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__nav-link {
+  @include type-small;
+  color: rgba($color-bg, 0.85);
+  @include focus-visible;
+
+  &:hover {
+    color: $color-accent-yellow;
+  }
+}
+
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xs;
+  padding-top: $space-lg;
+  border-top: 1px solid rgba($color-bg, 0.14);
+
+  @include respond-to(md) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.footer__note {
+  @include type-small;
+  font-weight: $font-weight-semibold;
+  color: $color-bg;
+  margin: 0;
+}
+
+.footer__meta {
+  @include type-small;
+  color: rgba($color-bg, 0.6);
+  margin: 0;
+}

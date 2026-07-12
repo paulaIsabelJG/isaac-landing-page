@@ -1,0 +1,68 @@
+<header class="header" [class.header--scrolled]="isScrolled()">
+  <div class="header__inner container">
+    <a routerLink="/" class="header__logo" aria-label="ISAAC — Ir al inicio">
+      <svg lucideMessageCircle class="header__logo-icon" aria-hidden="true"></svg>
+      <span class="header__logo-text">ISAAC</span>
+    </a>
+
+    <nav
+      id="primary-navigation"
+      class="header__nav"
+      [class.header__nav--open]="isMobileMenuOpen()"
+      aria-label="Navegación principal"
+    >
+      <ul class="header__nav-list">
+        @for (link of links; track link.target) {
+          <li>
+            <a
+              class="header__nav-link"
+              [routerLink]="isRoute(link.target) ? link.target : ['/']"
+              [fragment]="isRoute(link.target) ? undefined : link.target.replace('#', '')"
+              (click)="onNavClick($event, link.target)"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+
+      @if (ctaLink) {
+        <app-button
+          class="header__cta header__cta--mobile"
+          variant="primary"
+          size="md"
+          [fullWidth]="true"
+          (click)="onCtaClick()"
+        >
+          {{ ctaLink.label }}
+        </app-button>
+      }
+    </nav>
+
+    @if (ctaLink) {
+      <app-button
+        class="header__cta header__cta--desktop"
+        variant="primary"
+        size="md"
+        (click)="onCtaClick()"
+      >
+        {{ ctaLink.label }}
+      </app-button>
+    }
+
+    <button
+      type="button"
+      class="header__toggle"
+      [attr.aria-expanded]="isMobileMenuOpen()"
+      aria-controls="primary-navigation"
+      [attr.aria-label]="toggleLabel()"
+      (click)="toggleMobileMenu()"
+    >
+      @if (isMobileMenuOpen()) {
+        <svg lucideX aria-hidden="true"></svg>
+      } @else {
+        <svg lucideMenu aria-hidden="true"></svg>
+      }
+    </button>
+  </div>
+</header>

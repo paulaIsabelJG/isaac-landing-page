@@ -1,0 +1,159 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.features {
+  @include section-spacing;
+}
+
+.features__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-lg;
+  margin-top: $space-2xl;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.features__card {
+  // Orden importa: button-reset limpia el <button> nativo (fondo, borde,
+  // padding a cero) y card-base aplica DESPUÉS el aspecto de tarjeta;
+  // al revés, card-base quedaría anulado por el reset.
+  @include button-reset;
+  @include card-base;
+  @include focus-visible;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-sm;
+  width: 100%;
+  min-height: 44px; // área táctil suficiente
+  text-align: left;
+  border-top: 3px solid transparent;
+  border-color: $color-border;
+  cursor: pointer;
+  transition:
+    border-color $duration-fast $ease-standard,
+    box-shadow $duration-fast $ease-standard,
+    background-color $duration-fast $ease-standard;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+// Tarjeta activa: no depende solo del color. Se refuerza con borde,
+// fondo, sombra y un indicador con icono + texto sr-only.
+.features__card--active {
+  border-color: currentColor;
+  background-color: $color-bg-alt;
+  box-shadow: $shadow-md;
+}
+
+.features__active-indicator {
+  position: absolute;
+  top: $space-sm;
+  right: $space-sm;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: $radius-full;
+  background-color: currentColor;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: $color-bg;
+  }
+}
+
+// Acentos: color del icono + franja superior. Nunca es la única pista
+// (icono, título y descripción ya distinguen cada tarjeta por sí solos).
+.features__card--primary {
+  color: $color-primary;
+  border-top-color: $color-primary;
+
+  .features__icon {
+    background-color: rgba($color-primary, 0.12);
+    color: $color-primary;
+  }
+}
+
+.features__card--secondary {
+  color: $color-secondary;
+  border-top-color: $color-secondary;
+
+  .features__icon {
+    background-color: rgba($color-secondary, 0.12);
+    color: $color-secondary;
+  }
+}
+
+.features__card--coral {
+  color: $color-accent-coral;
+  border-top-color: $color-accent-coral;
+
+  .features__icon {
+    background-color: rgba($color-accent-coral, 0.14);
+    color: $color-accent-coral;
+  }
+}
+
+.features__card--green {
+  color: $color-accent-green;
+  border-top-color: $color-accent-green;
+
+  .features__icon {
+    background-color: rgba($color-accent-green, 0.16);
+    color: $color-accent-green;
+  }
+}
+
+.features__card--yellow {
+  color: $color-accent-yellow;
+  border-top-color: $color-accent-yellow;
+
+  .features__icon {
+    background-color: rgba($color-accent-yellow, 0.18);
+    color: $color-text;
+  }
+}
+
+.features__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: $radius-md;
+
+  svg {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+}
+
+.features__title {
+  display: block;
+  @include type-h3;
+  color: $color-text;
+}
+
+.features__description {
+  display: block;
+  @include type-body;
+  color: $color-text-muted;
+}
+
+.features__tag {
+  margin-top: auto;
+  padding-top: $space-2xs;
+}

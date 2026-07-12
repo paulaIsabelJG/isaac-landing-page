@@ -1,0 +1,40 @@
+<section class="personalization">
+  <div class="container">
+    <div class="personalization__intro">
+      <app-section-title
+        eyebrow="Paso 2 · Personalizar"
+        title="Un sistema adaptado a cada persona"
+        description="Desde el Board Builder, cada tablero puede ajustarse al vocabulario, el entorno, las rutinas y las capacidades de la persona usuaria."
+        align="left"
+        maxWidth="480px"
+      />
+
+      <ul class="personalization__list">
+        @for (detail of details; track detail) {
+          <li>{{ detail }}</li>
+        }
+      </ul>
+    </div>
+
+    <blockquote class="personalization__quote" appScrollReveal>
+      Un pictograma genérico puede representar un concepto, pero una imagen personal puede
+      representar la vida real de la persona.
+    </blockquote>
+
+    <div class="personalization__gallery">
+      @for (item of gallery; track item.src; let i = $index) {
+        <figure class="personalization__figure" appScrollReveal [delay]="i * 100">
+          <app-safe-image
+            [src]="item.src"
+            [alt]="item.alt"
+            [placeholderTitle]="item.title"
+            [placeholderDescription]="'Añade la imagen en public' + item.src"
+            rounded="lg"
+            aspectRatio="1 / 1"
+          />
+          <figcaption class="personalization__caption">{{ item.caption }}</figcaption>
+        </figure>
+      }
+    </div>
+  </div>
+</section>
