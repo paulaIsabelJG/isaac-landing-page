@@ -1,0 +1,73 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.collaborators__title {
+  @include type-h3;
+  color: $color-text;
+  margin-bottom: $space-sm;
+}
+
+.collaborators__description {
+  @include type-body;
+  color: $color-text-muted;
+  max-width: 640px;
+  margin-bottom: $space-xl;
+}
+
+.collaborators__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-lg;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.collaborators__card {
+  @include card-base;
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.collaborators__logo {
+  width: 100%;
+}
+
+.collaborators__body {
+  min-width: 0;
+}
+
+.collaborators__name {
+  @include type-body-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  margin-bottom: $space-3xs;
+}
+
+.collaborators__full-name {
+  @include type-small;
+  color: $color-text-muted;
+  font-style: italic;
+  margin-bottom: $space-2xs;
+}
+
+.collaborators__role {
+  @include type-small;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+  margin-bottom: $space-sm;
+}
+
+.collaborators__contributions {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  @include type-small;
+  color: $color-text-muted;
+}

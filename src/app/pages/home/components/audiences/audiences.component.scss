@@ -6,11 +6,20 @@
   background-color: $color-bg-alt;
 }
 
-.audiences__grid {
+// ---------------------------------------------------------------
+// Selector: acordeón de una columna en móvil, cuadrícula 2x2 en tablet,
+// fila de 4 en escritorio. El indicador animado solo existe en la fila
+// de escritorio (ver .audiences__indicator).
+// ---------------------------------------------------------------
+.audiences__selector-row {
+  position: relative;
+  margin-top: $space-2xl;
+}
+
+.audiences__selector {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-lg;
-  margin-top: $space-2xl;
+  gap: $space-sm;
 
   @include respond-to(md) {
     grid-template-columns: repeat(2, 1fr);
@@ -18,100 +27,91 @@
 
   @include respond-to(lg) {
     grid-template-columns: repeat(4, 1fr);
+    gap: 0;
   }
 }
 
-.audiences__card {
+.audiences__item {
+  min-width: 0;
+}
+
+.audiences__trigger {
   // Orden importa: button-reset limpia el <button> nativo primero;
-  // card-base aplica DESPUÉS el aspecto de tarjeta (si fuera al revés,
-  // button-reset anularía el fondo/borde/padding de card-base).
+  // el resto del estilo se aplica DESPUÉS.
   @include button-reset;
-  @include card-base;
   @include focus-visible;
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: $space-sm;
   width: 100%;
-  min-height: 44px;
+  min-height: 96px;
+  padding: $space-sm $space-md;
   text-align: left;
+  border: 1px solid $color-border;
   border-top: 3px solid transparent;
-  border-color: $color-border;
+  border-radius: $radius-md;
+  background-color: $color-surface;
   cursor: pointer;
   transition:
     border-color $duration-fast $ease-standard,
-    box-shadow $duration-fast $ease-standard,
-    background-color $duration-fast $ease-standard;
+    background-color $duration-fast $ease-standard,
+    box-shadow $duration-fast $ease-standard;
+
+  @include respond-to(lg) {
+    border-radius: $radius-md $radius-md 0 0;
+    border-right: none;
+  }
 
   &:hover {
-    box-shadow: $shadow-md;
+    box-shadow: $shadow-sm;
   }
 }
 
-// Tarjeta activa: no depende solo del color. Se refuerza con borde,
-// fondo, sombra y un indicador con icono + texto sr-only.
-.audiences__card--active {
+.audiences__item:last-child .audiences__trigger {
+  @include respond-to(lg) {
+    border-right: 1px solid $color-border;
+  }
+}
+
+// Activo: no depende solo del color (borde + fondo + sombra + icono Check
+// + texto sr-only "Perfil seleccionado").
+.audiences__trigger--active {
   border-color: currentColor;
   background-color: $color-bg;
-  box-shadow: $shadow-md;
-}
+  box-shadow: $shadow-sm;
 
-.audiences__active-indicator {
-  position: absolute;
-  top: $space-sm;
-  right: $space-sm;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: $radius-full;
-  background-color: currentColor;
-
-  svg {
-    width: 0.875rem;
-    height: 0.875rem;
-    color: $color-bg;
+  @include respond-to(lg) {
+    border-right: 1px solid currentColor;
   }
 }
 
-// Acentos: color del icono + franja superior. Nunca es la única pista
-// (icono, nombre y descripción ya distinguen cada perfil por sí solos).
-.audiences__card--primary {
+.audiences__trigger--primary {
   color: $color-primary;
-  border-top-color: $color-primary;
-
   .audiences__icon {
     background-color: rgba($color-primary, 0.12);
     color: $color-primary;
   }
 }
 
-.audiences__card--secondary {
+.audiences__trigger--secondary {
   color: $color-secondary;
-  border-top-color: $color-secondary;
-
   .audiences__icon {
     background-color: rgba($color-secondary, 0.12);
     color: $color-secondary;
   }
 }
 
-.audiences__card--coral {
+.audiences__trigger--coral {
   color: $color-accent-coral;
-  border-top-color: $color-accent-coral;
-
   .audiences__icon {
     background-color: rgba($color-accent-coral, 0.14);
     color: $color-accent-coral;
   }
 }
 
-.audiences__card--success {
+.audiences__trigger--success {
   color: $color-success;
-  border-top-color: $color-success;
-
   .audiences__icon {
     background-color: rgba($color-success, 0.12);
     color: $color-success;
@@ -119,29 +119,126 @@
 }
 
 .audiences__icon {
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: $radius-md;
 
   svg {
-    width: 1.375rem;
-    height: 1.375rem;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }
 
-.audiences__title {
-  display: block;
-  @include type-h3;
+.audiences__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  padding-right: $space-lg;
+}
+
+.audiences__name {
+  @include type-body;
+  font-weight: $font-weight-semibold;
   color: $color-text;
 }
 
-.audiences__description {
-  display: block;
+.audiences__desc {
   @include type-small;
   color: $color-text-muted;
+  line-height: 1.35;
+}
+
+.audiences__active-badge {
+  position: absolute;
+  top: $space-xs;
+  right: $space-xs;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: $radius-full;
+  background-color: currentColor;
+
+  svg {
+    width: 0.7rem;
+    height: 0.7rem;
+    color: $color-bg;
+  }
+}
+
+.audiences__chevron {
+  position: absolute;
+  top: 50%;
+  right: $space-xs;
+  transform: translateY(-50%);
+  display: inline-flex;
+  color: $color-text-muted;
+  transition: transform $duration-fast $ease-standard;
+
+  svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}
+
+.audiences__chevron--open {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+// Indicador animado: barra que se desplaza bajo la opción activa. Solo
+// existe en la fila de 4 columnas de escritorio (en el resto de anchos no
+// hay una única fila sobre la que deslizar un indicador 1D).
+.audiences__indicator {
+  display: none;
+
+  @include respond-to(lg) {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 25%;
+    height: 3px;
+    border-radius: $radius-full;
+    background-color: $color-primary;
+    transform: translateX(calc(var(--active) * 100%));
+    transition: transform 320ms $ease-standard;
+  }
+}
+
+@include reduced-motion {
+  .audiences__chevron,
+  .audiences__indicator {
+    transition: none;
+  }
+}
+
+// ---------------------------------------------------------------
+// Acordeón móvil: el panel de detalle aparece pegado a su propio
+// disparador, no al final de la lista.
+// ---------------------------------------------------------------
+.audiences__accordion-panel {
+  animation: audiences-accordion-in 220ms $ease-out;
+}
+
+@include reduced-motion {
+  .audiences__accordion-panel {
+    animation: none;
+  }
+}
+
+@keyframes audiences-accordion-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .audiences__cta {

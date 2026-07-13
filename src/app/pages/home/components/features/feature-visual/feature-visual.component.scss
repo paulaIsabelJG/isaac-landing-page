@@ -1,0 +1,298 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// El panel solo existe a partir de `md` (768px): por debajo, "Funcionalidades"
+// usa el layout apilado sin columna sticky (ver features.component.scss).
+:host {
+  display: none;
+
+  @include respond-to(md) {
+    display: block;
+  }
+}
+
+.visual {
+  position: sticky;
+  top: calc(#{$header-height-desktop} + #{$space-lg});
+}
+
+.visual__panel {
+  position: relative;
+  min-height: 24rem;
+}
+
+// ---------------------------------------------------------------
+// Transición entre funcionalidades: fade + leve escala + desplazamiento
+// vertical, controlada por las clases is-leaving / is-entering / is-active
+// que alterna el signal `stage` del componente.
+// ---------------------------------------------------------------
+.visual__stage {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition:
+    opacity 260ms $ease-out,
+    transform 260ms $ease-out;
+}
+
+.visual__stage.is-leaving {
+  opacity: 0;
+  transform: scale(0.98) translateY(-8px);
+}
+
+.visual__stage.is-entering {
+  opacity: 0;
+  transform: scale(0.98) translateY(12px);
+  transition: none;
+}
+
+// Entrada escalonada: tag y título tienen su propia transición con un
+// retraso creciente, además del fade del contenedor.
+.visual__tag,
+.visual__title {
+  transition:
+    opacity 320ms $ease-out,
+    transform 320ms $ease-out;
+}
+
+.visual__stage.is-entering .visual__tag,
+.visual__stage.is-entering .visual__title {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: none;
+}
+
+.visual__stage.is-active .visual__tag {
+  transition-delay: 0ms;
+}
+
+.visual__stage.is-active .visual__title {
+  transition-delay: 70ms;
+}
+
+@include reduced-motion {
+  .visual__stage,
+  .visual__tag,
+  .visual__title,
+  .gallery__frame {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+// ---------------------------------------------------------------
+// Galería: imagen principal + fila de selectores. Programada para
+// aceptar varias vistas por funcionalidad; funciona igual de bien con
+// placeholders que con imágenes reales una vez copiadas a public/.
+// ---------------------------------------------------------------
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.gallery__frame {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 380ms $ease-out,
+    transform 380ms $ease-out;
+}
+
+.gallery__frame.is-entering {
+  opacity: 0;
+  transform: translateX(10px);
+  transition: none;
+}
+
+.gallery__caption {
+  @include type-small;
+  color: $color-text-muted;
+  margin: $space-2xs 0 0;
+}
+
+.gallery__selectors {
+  display: flex;
+  gap: $space-2xs;
+  overflow-x: auto;
+  padding-bottom: $space-3xs;
+  scrollbar-width: thin;
+}
+
+.gallery__selector {
+  @include button-reset;
+  @include focus-visible;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3xs;
+  min-width: 4.5rem;
+  min-height: 44px;
+  padding: $space-2xs;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  background-color: $color-surface;
+  cursor: pointer;
+  transition:
+    border-color $duration-fast $ease-standard,
+    background-color $duration-fast $ease-standard,
+    box-shadow $duration-fast $ease-standard;
+
+  &:hover {
+    box-shadow: $shadow-sm;
+  }
+}
+
+// Selector activo: no depende solo del color (borde + fondo + icono Check).
+.gallery__selector--active {
+  border-color: currentColor;
+  background-color: $color-bg-alt;
+  box-shadow: $shadow-sm;
+}
+
+.gallery__selector-thumb {
+  position: relative;
+  width: 2.75rem;
+}
+
+.gallery__selector-check {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: $radius-full;
+  background-color: currentColor;
+  border: 2px solid $color-surface;
+
+  svg {
+    width: 0.65rem;
+    height: 0.65rem;
+    color: $color-bg;
+  }
+}
+
+.gallery__selector-label {
+  @include type-small;
+  font-size: 0.75rem;
+  color: $color-text;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.visual__meta {
+  margin-top: $space-xl;
+  padding-left: $space-3xs;
+}
+
+.visual__tag {
+  display: inline-block;
+  @include type-eyebrow;
+  color: currentColor;
+  margin-bottom: $space-2xs;
+}
+
+.visual__title {
+  @include type-h3;
+  color: $color-text;
+  margin: 0 0 $space-2xs;
+}
+
+.visual__caption {
+  @include type-body;
+  color: $color-text-muted;
+  font-style: italic;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Acentos: el color del acento tiñe el tag y el selector activo; el resto
+// del panel no depende del color.
+.visual__stage--primary {
+  color: $color-primary;
+}
+
+.visual__stage--secondary {
+  color: $color-secondary;
+}
+
+.visual__stage--coral {
+  color: $color-accent-coral;
+}
+
+.visual__stage--green {
+  color: $color-accent-green;
+}
+
+.visual__stage--yellow {
+  color: $color-text;
+}
+
+// ---------------------------------------------------------------
+// Indicador de progreso: contador "0X / 06" + puntos.
+// ---------------------------------------------------------------
+.visual__progress {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  margin-top: $space-xl;
+}
+
+.visual__counter {
+  @include type-small;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  font-variant-numeric: tabular-nums;
+}
+
+.visual__dots {
+  display: flex;
+  align-items: center;
+  gap: $space-2xs;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.visual__dot {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: $radius-full;
+  background-color: $color-border-strong;
+  transition:
+    width 250ms $ease-standard,
+    background-color 250ms $ease-standard;
+}
+
+.visual__dot--active {
+  width: 1.5rem;
+  background-color: currentColor;
+}
+
+.visual__dot--primary.visual__dot--active {
+  color: $color-primary;
+}
+
+.visual__dot--secondary.visual__dot--active {
+  color: $color-secondary;
+}
+
+.visual__dot--coral.visual__dot--active {
+  color: $color-accent-coral;
+}
+
+.visual__dot--green.visual__dot--active {
+  color: $color-accent-green;
+}
+
+.visual__dot--yellow.visual__dot--active {
+  color: $color-accent-yellow;
+}

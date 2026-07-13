@@ -1,0 +1,91 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.next-steps__title {
+  @include type-h3;
+  color: $color-text;
+  margin-bottom: $space-xl;
+}
+
+.next-steps__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-lg;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.next-steps__block {
+  @include card-base;
+  border-top: 3px solid transparent;
+}
+
+.next-steps__block--scheduled {
+  border-top-color: $color-primary;
+}
+
+.next-steps__block--evolution {
+  border-top-color: $color-secondary;
+}
+
+.next-steps__block-title {
+  @include type-body-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  margin-bottom: $space-md;
+}
+
+.next-steps__list {
+  display: grid;
+  gap: $space-sm;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-sm;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.15rem;
+  }
+
+  span {
+    @include type-small;
+    color: $color-text;
+  }
+
+  strong {
+    color: $color-text;
+  }
+}
+
+.next-steps__block--scheduled svg {
+  color: $color-primary;
+}
+
+.next-steps__block--evolution svg {
+  color: $color-secondary;
+}
+
+.next-steps__tag {
+  display: inline-block;
+  margin-left: $space-2xs;
+  padding: 0.05rem 0.5rem;
+  border-radius: $radius-full;
+  background-color: $color-bg-alt;
+  color: $color-text-muted;
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}

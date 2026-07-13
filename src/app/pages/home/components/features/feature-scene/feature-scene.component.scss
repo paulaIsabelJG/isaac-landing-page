@@ -1,0 +1,225 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.scene {
+  display: flex;
+  align-items: center;
+  padding-block: $space-xl 0;
+  border-top: 1px solid $color-border;
+
+  &:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  @include respond-to(md) {
+    min-height: 60vh;
+    padding-block: $space-2xl 0;
+    border-top: none;
+  }
+
+  @include respond-to(lg) {
+    min-height: 78vh;
+  }
+}
+
+.scene__inner {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  max-width: 46ch;
+}
+
+.scene__meta {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+}
+
+.scene__step {
+  @include type-eyebrow;
+  color: $color-text-muted;
+  letter-spacing: $letter-spacing-eyebrow;
+}
+
+.scene__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: $radius-md;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.scene__eyebrow {
+  @include type-eyebrow;
+  color: currentColor;
+  margin: 0;
+}
+
+.scene__title {
+  @include type-h2;
+  font-size: $font-size-h2;
+  color: $color-text;
+  font-style: italic;
+  margin: 0;
+}
+
+.scene__description {
+  @include type-body-lg;
+  color: $color-text-muted;
+  margin: 0;
+}
+
+// La imagen solo se muestra apilada en móvil/tablet estrecha; a partir de
+// `md` (donde se activa el panel visual sticky) la imagen vive allí y esta
+// copia se oculta para no duplicarla.
+.scene__image {
+  margin-block: $space-2xs;
+
+  @include respond-to(md) {
+    display: none;
+  }
+}
+
+.scene__capabilities {
+  display: grid;
+  gap: $space-2xs;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: $space-2xs;
+    @include type-small;
+    color: $color-text;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    color: currentColor;
+  }
+}
+
+.scene__highlight {
+  @include type-body;
+  font-style: italic;
+  color: $color-text;
+  border-left: 3px solid currentColor;
+  padding-left: $space-sm;
+  margin: 0;
+}
+
+.scene__progress {
+  @include type-small;
+  color: $color-text-muted;
+  margin: 0;
+}
+
+.scene__more {
+  @include type-small;
+  color: $color-text-muted;
+
+  summary {
+    cursor: pointer;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    @include focus-visible;
+  }
+}
+
+.scene__more-content {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  margin-top: $space-sm;
+  padding-top: $space-sm;
+  border-top: 1px solid $color-border;
+}
+
+.scene__more-text,
+.scene__more-note {
+  @include type-small;
+  color: $color-text-muted;
+  white-space: pre-line;
+  margin: 0;
+}
+
+.scene__more-title {
+  @include type-eyebrow;
+  color: $color-text-muted;
+  margin: 0;
+}
+
+.scene__more-list {
+  display: grid;
+  gap: $space-3xs;
+  margin: 0;
+  padding-left: 1.1rem;
+  @include type-small;
+  color: $color-text-muted;
+
+  @include respond-to(sm) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.scene__more-workflow {
+  display: grid;
+  gap: $space-3xs;
+  margin: 0;
+  padding-left: 1.1rem;
+  @include type-small;
+  color: $color-text-muted;
+}
+
+// Acentos: color del icono/eyebrow + franja del highlight. El resto del
+// contenido (título, capacidades, texto) no depende del color para
+// diferenciarse entre escenas.
+.scene--primary {
+  color: $color-primary;
+  .scene__icon {
+    background-color: rgba($color-primary, 0.12);
+  }
+}
+
+.scene--secondary {
+  color: $color-secondary;
+  .scene__icon {
+    background-color: rgba($color-secondary, 0.12);
+  }
+}
+
+.scene--coral {
+  color: $color-accent-coral;
+  .scene__icon {
+    background-color: rgba($color-accent-coral, 0.14);
+  }
+}
+
+.scene--green {
+  color: $color-accent-green;
+  .scene__icon {
+    background-color: rgba($color-accent-green, 0.16);
+  }
+}
+
+.scene--yellow {
+  // El amarillo de acento no cumple contraste como color de texto: se
+  // reserva para el fondo del icono, igual que en el resto de tarjetas
+  // con este acento en la aplicación.
+  color: $color-text;
+  .scene__icon {
+    background-color: rgba($color-accent-yellow, 0.18);
+    color: $color-text;
+  }
+}

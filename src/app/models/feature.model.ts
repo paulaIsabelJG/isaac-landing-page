@@ -1,20 +1,27 @@
 export type FeatureAccent = 'primary' | 'secondary' | 'coral' | 'green' | 'yellow';
 
+export interface FeatureImage {
+  src: string;
+  alt: string;
+  label: string;
+  caption?: string;
+}
+
 export interface Feature {
   id: string;
+  step: string;
+  shortTitle: string;
   title: string;
-  shortDescription: string;
-  longDescription: string;
+  description: string;
   icon: string;
   accent: FeatureAccent;
   tag?: string;
-  imageSrc: string;
-  imageAlt: string;
-  secondaryImageSrc?: string;
-  secondaryImageAlt?: string;
-  bullets: string[];
+  capabilities: string[];
+  highlight: string;
+  images: FeatureImage[];
+  detailedCapabilities?: string[];
+  longDescription?: string;
   workflow?: string[];
-  highlight?: string;
   technicalNote?: string;
   linkLabel?: string;
   linkTarget?: string;

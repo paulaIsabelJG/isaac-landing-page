@@ -1,0 +1,78 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.current-state__intro {
+  max-width: 720px;
+  margin-bottom: $space-xl;
+}
+
+.current-state__title {
+  @include type-h3;
+  color: $color-text;
+  margin-bottom: $space-sm;
+}
+
+.current-state__text {
+  @include type-body;
+  color: $color-text-muted;
+  margin-bottom: $space-md;
+}
+
+.current-state__body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-xl;
+  align-items: start;
+
+  @include respond-to(lg) {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+}
+
+.current-state__columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-lg;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.current-state__column-title {
+  @include type-body-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  margin-bottom: $space-sm;
+}
+
+.current-state__list {
+  display: grid;
+  gap: $space-sm;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2xs;
+    @include type-small;
+    color: $color-text;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.1rem;
+  }
+}
+
+.current-state__list--done svg {
+  color: $color-success;
+}
+
+.current-state__list--next svg {
+  color: $color-secondary;
+}

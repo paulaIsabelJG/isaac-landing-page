@@ -1,0 +1,38 @@
+<div class="collaborators">
+  <h3 class="collaborators__title">Un proyecto construido desde diferentes perspectivas</h3>
+  <p class="collaborators__description">
+    ISAAC ha contado con la colaboración, revisión y apoyo de entidades vinculadas a la discapacidad, la
+    comunicación, la educación y la atención sanitaria.
+  </p>
+
+  <ul class="collaborators__grid">
+    @for (entity of collaborators; track entity.id; let i = $index) {
+      <li class="collaborators__card" appScrollReveal [delay]="i * 80">
+        <app-safe-image
+          class="collaborators__logo"
+          [src]="entity.imageSrc"
+          [alt]="entity.imageAlt"
+          [placeholderTitle]="'Logo pendiente'"
+          [placeholderDescription]="'Añade el logo en public' + entity.imageSrc"
+          aspectRatio="3 / 1"
+          objectFit="contain"
+          rounded="md"
+        />
+
+        <div class="collaborators__body">
+          <h4 class="collaborators__name">{{ entity.name }}</h4>
+          @if (entity.fullName) {
+            <p class="collaborators__full-name">{{ entity.fullName }}</p>
+          }
+          <p class="collaborators__role">{{ entity.role }}</p>
+
+          <ul class="collaborators__contributions">
+            @for (item of entity.contributions; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </div>
+      </li>
+    }
+  </ul>
+</div>

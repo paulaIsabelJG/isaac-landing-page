@@ -1,0 +1,56 @@
+<div class="timeline-block">
+  <h3 class="timeline-block__title">Una idea que ha seguido creciendo</h3>
+
+  <ol class="timeline">
+    @for (milestone of milestones; track milestone.id; let i = $index) {
+      <li
+        class="timeline__item"
+        [class]="'timeline__item--' + milestone.status"
+        [class.timeline__item--right]="isRight(i)"
+        appScrollReveal
+        [threshold]="0.15"
+      >
+        <span class="timeline__marker" [class]="'timeline__marker--' + milestone.status" aria-hidden="true">
+          <svg [lucideIcon]="markerIconFor(milestone)"></svg>
+        </span>
+
+        <div class="timeline__card">
+          <div class="timeline__meta">
+            <span class="timeline__date">{{ milestone.date }}</span>
+            <span class="timeline__status" [class]="'timeline__status--' + milestone.status">
+              <svg [lucideIcon]="statusIconFor(milestone.status)" aria-hidden="true"></svg>
+              {{ labelFor(milestone.status) }}
+            </span>
+          </div>
+
+          <h4 class="timeline__title">{{ milestone.title }}</h4>
+          <p class="timeline__description">{{ milestone.description }}</p>
+
+          @if (milestone.imageSrc && milestone.imageAlt) {
+            <app-safe-image
+              class="timeline__image"
+              [src]="milestone.imageSrc"
+              [alt]="milestone.imageAlt"
+              [placeholderTitle]="'Imagen pendiente'"
+              [placeholderDescription]="'Añade la imagen en public' + milestone.imageSrc"
+              aspectRatio="16 / 10"
+              rounded="md"
+            />
+          }
+
+          @if (milestone.details; as details) {
+            <ul class="timeline__details">
+              @for (detail of details; track detail) {
+                <li>{{ detail }}</li>
+              }
+            </ul>
+          }
+
+          @if (milestone.highlight) {
+            <p class="timeline__highlight">{{ milestone.highlight }}</p>
+          }
+        </div>
+      </li>
+    }
+  </ol>
+</div>

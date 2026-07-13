@@ -1,1 +1,39 @@
-<p>how-it-works works!</p>
+<section id="como-funciona" class="how-it-works">
+  <div class="container">
+    <app-section-title
+      eyebrow="Cómo funciona"
+      title="Un ciclo completo alrededor de la comunicación"
+      description="ISAAC conecta la creación de tableros, la comunicación y el seguimiento en un proceso continuo que evoluciona con cada persona."
+      align="center"
+      maxWidth="560px"
+    />
+
+    <div class="how-it-works__diagram">
+      <ol class="how-it-works__row">
+        @for (step of steps; track step.id) {
+          <li class="how-it-works__step" [class]="'how-it-works__step--' + step.accent">
+            <span class="how-it-works__circle">
+              <svg [lucideIcon]="iconFor(step.icon)" class="how-it-works__icon" aria-hidden="true"></svg>
+              <span class="how-it-works__number" aria-hidden="true">{{ step.number }}</span>
+            </span>
+            <span class="how-it-works__label">{{ step.shortTitle }}</span>
+            <span class="how-it-works__summary">{{ step.summary }}</span>
+          </li>
+        }
+      </ol>
+
+      <span class="how-it-works__loop-bracket" aria-hidden="true"></span>
+    </div>
+
+    <p class="how-it-works__loop-note">
+      <svg lucideRepeat2 aria-hidden="true"></svg>
+      <span>El proceso vuelve de <strong>Objetivos</strong> a <strong>Personalizar</strong> para seguir adaptándose.</span>
+    </p>
+
+    <div class="how-it-works__cta">
+      <app-button variant="secondary" size="md" [routerLink]="['/como-funciona']">
+        Ver el proceso completo
+      </app-button>
+    </div>
+  </div>
+</section>

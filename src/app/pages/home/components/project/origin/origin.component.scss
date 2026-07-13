@@ -1,0 +1,61 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.origin {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-xl;
+  align-items: start;
+
+  @include respond-to(lg) {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: $space-2xl;
+  }
+}
+
+.origin__title {
+  @include type-h3;
+  color: $color-text;
+  margin-bottom: $space-md;
+}
+
+.origin__main-text {
+  @include type-body-lg;
+  color: $color-text;
+  font-weight: $font-weight-medium;
+  margin-bottom: $space-sm;
+}
+
+.origin__text {
+  @include type-body;
+  color: $color-text-muted;
+  margin-bottom: $space-sm;
+}
+
+.origin__highlight {
+  @include type-body;
+  color: $color-text;
+  font-style: italic;
+  border-left: 3px solid $color-primary;
+  padding-left: $space-md;
+  margin: $space-lg 0;
+}
+
+.origin__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2xs;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.origin__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-sm;
+}
+
+.origin__image--main {
+  grid-column: 1 / -1;
+}

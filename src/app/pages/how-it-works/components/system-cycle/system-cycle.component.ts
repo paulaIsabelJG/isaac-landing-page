@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   LucideChartPie,
   LucideClipboardList,
@@ -11,7 +11,7 @@ import {
   type LucideIconInput,
 } from '@lucide/angular';
 import { SectionTitleComponent } from '../../../../shared/components/section-title/section-title.component';
-import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
+import { ScrollService } from '../../../../core/services/scroll.service';
 import { cycleSteps } from '../../../../data/cycle-steps.data';
 
 // Mapa local: los pasos llegan como string desde data/cycle-steps.data.ts,
@@ -28,15 +28,31 @@ const CYCLE_ICONS: Record<string, LucideIconInput> = {
 @Component({
   selector: 'app-system-cycle',
   standalone: true,
-  imports: [SectionTitleComponent, ScrollRevealDirective, LucideDynamicIcon, LucideRepeat2],
+  imports: [SectionTitleComponent, LucideDynamicIcon, LucideRepeat2],
   templateUrl: './system-cycle.component.html',
   styleUrl: './system-cycle.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SystemCycleComponent {
+  private readonly scrollService = inject(ScrollService);
+
   protected readonly steps = cycleSteps;
 
   protected iconFor(key: string): LucideIconInput {
     return CYCLE_ICONS[key];
+  }
+
+  /**
+   * El resumen es un mapa opcional: el enlace real (href="#anchor") ya
+   * funciona sin JavaScript. Aquí solo se mejora con scroll suave y el
+   * desplazamiento por la altura del header, sin cambiar de ruta (misma
+   * página) y sin interceptar clics con modificador (nueva pestaña, etc.).
+   */
+  protected onStepClick(event: MouseEvent, anchor: string): void {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+    event.preventDefault();
+    this.scrollService.scrollToSection(anchor);
   }
 }

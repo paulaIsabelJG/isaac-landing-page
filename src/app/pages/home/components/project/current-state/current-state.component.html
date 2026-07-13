@@ -1,0 +1,45 @@
+<div class="current-state" appScrollReveal>
+  <div class="current-state__intro">
+    <h3 class="current-state__title">{{ state.title }}</h3>
+    <p class="current-state__text">{{ state.text }}</p>
+    <app-badge [text]="state.badgeText" variant="primary" />
+  </div>
+
+  <div class="current-state__body">
+    <app-safe-image
+      class="current-state__image"
+      [src]="state.imageSrc"
+      [alt]="state.imageAlt"
+      [placeholderTitle]="'Imagen pendiente'"
+      [placeholderDescription]="'Añade la imagen en public' + state.imageSrc"
+      aspectRatio="4 / 3"
+      rounded="lg"
+    />
+
+    <div class="current-state__columns">
+      <div class="current-state__column">
+        <h4 class="current-state__column-title">Completado</h4>
+        <ul class="current-state__list current-state__list--done">
+          @for (item of state.completed; track item) {
+            <li>
+              <svg lucideCircleCheckBig aria-hidden="true"></svg>
+              <span>{{ item }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="current-state__column">
+        <h4 class="current-state__column-title">Siguiente etapa</h4>
+        <ul class="current-state__list current-state__list--next">
+          @for (item of state.next; track item) {
+            <li>
+              <svg lucideCompass aria-hidden="true"></svg>
+              <span>{{ item }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

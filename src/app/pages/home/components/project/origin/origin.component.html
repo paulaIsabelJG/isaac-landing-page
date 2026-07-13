@@ -1,0 +1,49 @@
+<div class="origin" appScrollReveal>
+  <div class="origin__content">
+    <h3 class="origin__title">{{ origin.title }}</h3>
+
+    <p class="origin__main-text">{{ origin.mainText }}</p>
+    <p class="origin__text">{{ origin.extendedText }}</p>
+    <p class="origin__text">{{ origin.technicalText }}</p>
+
+    <blockquote class="origin__highlight">{{ origin.highlight }}</blockquote>
+
+    <ul class="origin__tags">
+      @for (tag of origin.tags; track tag) {
+        <li>
+          <app-badge [text]="tag" variant="secondary" size="sm" />
+        </li>
+      }
+    </ul>
+  </div>
+
+  <div class="origin__gallery">
+    <app-safe-image
+      class="origin__image origin__image--main"
+      [src]="origin.imageSrc"
+      [alt]="origin.imageAlt"
+      [placeholderTitle]="'Imagen pendiente'"
+      [placeholderDescription]="'Añade la imagen en public' + origin.imageSrc"
+      aspectRatio="16 / 10"
+      rounded="lg"
+    />
+    <app-safe-image
+      class="origin__image"
+      [src]="origin.secondaryImageSrc"
+      [alt]="origin.secondaryImageAlt"
+      [placeholderTitle]="'Imagen pendiente'"
+      [placeholderDescription]="'Añade la imagen en public' + origin.secondaryImageSrc"
+      aspectRatio="4 / 3"
+      rounded="lg"
+    />
+    <app-safe-image
+      class="origin__image"
+      [src]="origin.tertiaryImageSrc"
+      [alt]="origin.tertiaryImageAlt"
+      [placeholderTitle]="'Imagen pendiente'"
+      [placeholderDescription]="'Añade la imagen en public' + origin.tertiaryImageSrc"
+      aspectRatio="4 / 3"
+      rounded="lg"
+    />
+  </div>
+</div>

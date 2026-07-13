@@ -8,39 +8,14 @@
       maxWidth="640px"
     />
 
-    <div class="features__grid">
-      @for (feature of features; track feature.id; let i = $index) {
-        <button
-          type="button"
-          [class]="'features__card features__card--' + feature.accent"
-          [class.features__card--active]="isActive(feature.id)"
-          [attr.aria-pressed]="isActive(feature.id)"
-          aria-controls="feature-detail-panel"
-          appScrollReveal
-          [delay]="(i % 3) * 100"
-          (click)="selectFeature(feature.id)"
-        >
-          @if (isActive(feature.id)) {
-            <span class="features__active-indicator" aria-hidden="true">
-              <svg lucideCheck></svg>
-            </span>
-            <span class="sr-only">Funcionalidad seleccionada</span>
-          }
+    <div class="features__layout">
+      <div class="features__scenes">
+        @for (feature of features; track feature.id) {
+          <app-feature-scene [feature]="feature" [total]="total" />
+        }
+      </div>
 
-          <span class="features__icon" aria-hidden="true">
-            <svg [lucideIcon]="iconFor(feature.icon)"></svg>
-          </span>
-
-          <span class="features__title">{{ feature.title }}</span>
-          <span class="features__description">{{ feature.shortDescription }}</span>
-
-          @if (feature.tag) {
-            <app-badge class="features__tag" [text]="feature.tag" variant="neutral" size="sm" />
-          }
-        </button>
-      }
+      <app-feature-visual [feature]="activeFeature()" [features]="features" />
     </div>
-
-    <app-feature-detail [feature]="activeFeature()" />
   </div>
 </section>

@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { HeroComponent } from './components/hero/hero.component';
+import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { AudiencesComponent } from './components/audiences/audiences.component';
+import { ProjectComponent } from './components/project/project.component';
 import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [HeroComponent, FeaturesComponent, AudiencesComponent],
+  imports: [HeroComponent, HowItWorksComponent, FeaturesComponent, AudiencesComponent, ProjectComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

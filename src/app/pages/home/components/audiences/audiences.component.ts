@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import {
   LucideBriefcase,
   LucideBuilding2,
   LucideCheck,
+  LucideChevronDown,
   LucideDynamicIcon,
   LucideHeartHandshake,
   LucideUserRound,
@@ -10,7 +11,6 @@ import {
 } from '@lucide/angular';
 import { SectionTitleComponent } from '../../../../shared/components/section-title/section-title.component';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
 import { AudienceDetailComponent } from './audience-detail/audience-detail.component';
 import { audiences } from '../../../../data/audiences.data';
 import type { Audience } from '../../../../models/audience.model';
@@ -23,15 +23,19 @@ const AUDIENCE_ICONS: Record<string, LucideIconInput> = {
   'building-2': LucideBuilding2,
 };
 
+// Por debajo de `md` (768px) el selector se comporta como acordeón; a
+// partir de ahí es un selector (cuadrícula 2x2 o fila de 4) + panel fijo.
+const MOBILE_QUERY = '(max-width: 767px)';
+
 @Component({
   selector: 'app-audiences',
   standalone: true,
   imports: [
     SectionTitleComponent,
     ButtonComponent,
-    ScrollRevealDirective,
     LucideDynamicIcon,
     LucideCheck,
+    LucideChevronDown,
     AudienceDetailComponent,
   ],
   templateUrl: './audiences.component.html',
@@ -41,21 +45,38 @@ const AUDIENCE_ICONS: Record<string, LucideIconInput> = {
 export class AudiencesComponent {
   protected readonly audiences = audiences;
 
-  private readonly activeId = signal<string>(audiences[0].id);
+  private readonly destroyRef = inject(DestroyRef);
 
-  protected readonly activeAudience = computed<Audience>(
-    () => this.audiences.find((audience) => audience.id === this.activeId()) ?? this.audiences[0],
-  );
+  protected readonly activeAudienceIndex = signal(0);
+  protected readonly activeAudience = computed<Audience>(() => this.audiences[this.activeAudienceIndex()]);
+
+  protected readonly isMobileLayout = signal(this.matchesMobile());
+
+  constructor() {
+    const mediaQuery = window.matchMedia(MOBILE_QUERY);
+    const onChange = (event: MediaQueryListEvent): void => this.isMobileLayout.set(event.matches);
+    mediaQuery.addEventListener('change', onChange);
+    this.destroyRef.onDestroy(() => mediaQuery.removeEventListener('change', onChange));
+  }
 
   protected iconFor(key: string): LucideIconInput {
     return AUDIENCE_ICONS[key];
   }
 
-  protected isActive(id: string): boolean {
-    return this.activeId() === id;
+  protected isActiveIndex(index: number): boolean {
+    return this.activeAudienceIndex() === index;
   }
 
-  protected selectAudience(id: string): void {
-    this.activeId.set(id);
+  /**
+   * Escritorio/tablet: cambia el perfil mostrado en el panel fijo.
+   * Móvil: expande ese perfil como acordeón (exclusivo, solo uno abierto;
+   * pulsar el que ya está abierto no lo cierra, igual que en el selector).
+   */
+  protected selectAudience(index: number): void {
+    this.activeAudienceIndex.set(index);
+  }
+
+  private matchesMobile(): boolean {
+    return window.matchMedia(MOBILE_QUERY).matches;
   }
 }

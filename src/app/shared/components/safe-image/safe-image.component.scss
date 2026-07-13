@@ -61,4 +61,8 @@
   @include type-small;
   color: $color-text-muted;
   margin: 0;
+  // Las rutas largas (p. ej. "public/images/.../archivo.webp") no tienen
+  // espacios: sin esto, desbordarían contenedores estrechos en vez de
+  // partirse en varias líneas.
+  overflow-wrap: anywhere;
 }

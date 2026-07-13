@@ -5,6 +5,9 @@ export const cycleSteps: CycleStep[] = [
     id: 'crear-importar',
     number: 1,
     title: 'Crear o importar',
+    shortTitle: 'Crear',
+    anchor: 'crear',
+    summary: 'Empieza desde cero o reutiliza tableros compatibles.',
     description:
       'Crea un tablero desde cero o importa un archivo compatible en formato OBZ para continuar trabajando sobre materiales ya preparados.',
     details: [
@@ -21,6 +24,9 @@ export const cycleSteps: CycleStep[] = [
     id: 'personalizar',
     number: 2,
     title: 'Personalizar',
+    shortTitle: 'Personalizar',
+    anchor: 'personalizar',
+    summary: 'Adapta pictogramas, estructura, navegación y voz.',
     description:
       'Adapta el tablero a cada persona desde el Board Builder, modificando estructura, pictogramas, acciones, voz y usuarios asignados.',
     details: [
@@ -39,6 +45,9 @@ export const cycleSteps: CycleStep[] = [
     id: 'comunicar',
     number: 3,
     title: 'Comunicar',
+    shortTitle: 'Comunicar',
+    anchor: 'comunicar',
+    summary: 'Construye frases y reproduce mensajes mediante voz.',
     description:
       'La persona construye frases mediante pictogramas, navega entre tableros y reproduce el mensaje en voz alta.',
     details: [
@@ -55,6 +64,9 @@ export const cycleSteps: CycleStep[] = [
     id: 'registrar',
     number: 4,
     title: 'Registrar',
+    shortTitle: 'Registrar',
+    anchor: 'registrar',
+    summary: 'Conserva las interacciones de la sesión mediante OBL.',
     description:
       'ISAAC registra las interacciones de cada sesión mediante OBL para conservar información sobre selecciones, frases, navegación y tiempos.',
     details: ['Eventos OBL', 'Frases creadas', 'Interacciones', 'Navegación', 'Tiempo de uso'],
@@ -65,6 +77,9 @@ export const cycleSteps: CycleStep[] = [
     id: 'analizar',
     number: 5,
     title: 'Analizar',
+    shortTitle: 'Analizar',
+    anchor: 'analizar',
+    summary: 'Revisa frases, tableros y patrones de uso.',
     description:
       'Profesionales y organizaciones pueden consultar estadísticas, reconstruir frases y detectar patrones de uso o posibles dificultades.',
     details: [
@@ -82,6 +97,9 @@ export const cycleSteps: CycleStep[] = [
     id: 'establecer-objetivos',
     number: 6,
     title: 'Establecer objetivos',
+    shortTitle: 'Objetivos',
+    anchor: 'objetivos',
+    summary: 'Convierte la información en ajustes y nuevas metas.',
     description:
       'Los datos permiten definir objetivos comunicativos, añadir comentarios y revisar la evolución para seguir adaptando el sistema.',
     details: [

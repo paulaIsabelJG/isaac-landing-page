@@ -8,36 +8,59 @@
       maxWidth="640px"
     />
 
-    <div class="audiences__grid">
-      @for (audience of audiences; track audience.id; let i = $index) {
-        <button
-          type="button"
-          [class]="'audiences__card audiences__card--' + audience.accent"
-          [class.audiences__card--active]="isActive(audience.id)"
-          [attr.aria-pressed]="isActive(audience.id)"
-          aria-controls="audience-detail-panel"
-          appScrollReveal
-          [delay]="i * 80"
-          (click)="selectAudience(audience.id)"
-        >
-          @if (isActive(audience.id)) {
-            <span class="audiences__active-indicator" aria-hidden="true">
-              <svg lucideCheck></svg>
-            </span>
-            <span class="sr-only">Perfil seleccionado</span>
-          }
+    <div class="audiences__selector-row">
+      <div class="audiences__selector">
+        @for (audience of audiences; track audience.id; let i = $index) {
+          <div class="audiences__item">
+            <button
+              type="button"
+              [class]="'audiences__trigger audiences__trigger--' + audience.accent"
+              [class.audiences__trigger--active]="isActiveIndex(i)"
+              [attr.aria-pressed]="isMobileLayout() ? null : isActiveIndex(i)"
+              [attr.aria-expanded]="isMobileLayout() ? isActiveIndex(i) : null"
+              aria-controls="audience-detail-panel"
+              (click)="selectAudience(i)"
+            >
+              <span class="audiences__icon" aria-hidden="true">
+                <svg [lucideIcon]="iconFor(audience.icon)"></svg>
+              </span>
 
-          <span class="audiences__icon" aria-hidden="true">
-            <svg [lucideIcon]="iconFor(audience.icon)"></svg>
-          </span>
+              <span class="audiences__text">
+                <span class="audiences__name">{{ audience.shortTitle }}</span>
+                <span class="audiences__desc">{{ audience.shortDescription }}</span>
+              </span>
 
-          <span class="audiences__title">{{ audience.shortTitle }}</span>
-          <span class="audiences__description">{{ audience.shortDescription }}</span>
-        </button>
+              @if (isActiveIndex(i)) {
+                <span class="audiences__active-badge" aria-hidden="true">
+                  <svg lucideCheck></svg>
+                </span>
+                <span class="sr-only">Perfil seleccionado</span>
+              }
+
+              @if (isMobileLayout()) {
+                <span class="audiences__chevron" [class.audiences__chevron--open]="isActiveIndex(i)" aria-hidden="true">
+                  <svg lucideChevronDown></svg>
+                </span>
+              }
+            </button>
+
+            @if (isMobileLayout() && isActiveIndex(i)) {
+              <div class="audiences__accordion-panel">
+                <app-audience-detail [audience]="audience" />
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      @if (!isMobileLayout()) {
+        <span class="audiences__indicator" [style.--active]="activeAudienceIndex()" aria-hidden="true"></span>
       }
     </div>
 
-    <app-audience-detail [audience]="activeAudience()" />
+    @if (!isMobileLayout()) {
+      <app-audience-detail [audience]="activeAudience()" />
+    }
 
     <div class="audiences__cta">
       <app-button variant="ghost" size="md" [routerLink]="['/como-funciona']">

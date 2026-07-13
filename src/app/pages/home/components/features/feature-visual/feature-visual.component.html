@@ -1,0 +1,84 @@
+<div class="visual">
+  <div class="visual__panel">
+    @if (displayedFeature(); as feature) {
+      <div [class]="'visual__stage visual__stage--' + feature.accent + ' is-' + stage()">
+        <div class="gallery" role="group" [attr.aria-label]="'Galería visual de ' + feature.shortTitle">
+          <div class="gallery__frame" [class.is-entering]="imageStage() === 'entering'">
+            @if (displayedImage(); as image) {
+              <app-safe-image
+                class="gallery__image"
+                [src]="image.src"
+                [alt]="image.alt"
+                [placeholderTitle]="image.label"
+                [placeholderDescription]="'Añade la imagen en public' + image.src"
+                aspectRatio="16 / 10"
+                rounded="lg"
+                [eager]="true"
+              />
+              @if (image.caption) {
+                <p class="gallery__caption">{{ image.caption }}</p>
+              }
+            }
+          </div>
+
+          @if (feature.images.length > 1) {
+            <div class="gallery__selectors">
+              @for (image of feature.images; track image.label; let i = $index) {
+                <button
+                  type="button"
+                  class="gallery__selector"
+                  [class.gallery__selector--active]="isActiveImage(i)"
+                  [attr.aria-pressed]="isActiveImage(i)"
+                  [attr.aria-label]="'Mostrar vista ' + image.label"
+                  (click)="selectImage(i)"
+                >
+                  <span class="gallery__selector-thumb">
+                    <app-safe-image
+                      [src]="image.src"
+                      [alt]="''"
+                      placeholderTitle=""
+                      placeholderDescription=""
+                      aspectRatio="4 / 3"
+                      rounded="sm"
+                    />
+                    @if (isActiveImage(i)) {
+                      <span class="gallery__selector-check" aria-hidden="true">
+                        <svg lucideCheck></svg>
+                      </span>
+                    }
+                  </span>
+                  <span class="gallery__selector-label">{{ image.label }}</span>
+                </button>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Repite en texto lo que ya cuenta la escena narrativa activa:
+             se oculta de lectores de pantalla para no duplicar el mensaje. -->
+        <div class="visual__meta" aria-hidden="true">
+          @if (feature.tag) {
+            <span class="visual__tag">{{ feature.tag }}</span>
+          }
+          <p class="visual__title">{{ feature.shortTitle }}</p>
+          <p class="visual__caption">{{ feature.highlight }}</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="visual__progress">
+    <span class="visual__counter">{{ progressLabel() }}</span>
+    <ul class="visual__dots" aria-label="Progreso por funcionalidades">
+      @for (item of features(); track item.id) {
+        <li>
+          <span
+            [class]="'visual__dot visual__dot--' + item.accent"
+            [class.visual__dot--active]="isActiveDot(item.id)"
+            [attr.aria-current]="isActiveDot(item.id) ? 'true' : null"
+          ></span>
+        </li>
+      }
+    </ul>
+  </div>
+</div>

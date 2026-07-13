@@ -1,0 +1,14 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.project {
+  @include section-spacing;
+}
+
+.project__block {
+  margin-top: $space-3xl;
+
+  &:first-of-type {
+    margin-top: $space-2xl;
+  }
+}

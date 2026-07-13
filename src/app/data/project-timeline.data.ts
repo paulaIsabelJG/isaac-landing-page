@@ -1,0 +1,130 @@
+import type { TimelineMilestone } from '../models/timeline-milestone.model';
+
+export const projectTimeline: TimelineMilestone[] = [
+  {
+    id: 'aprendizaje-servicio',
+    date: 'Curso 2024-2025',
+    title: 'Primer prototipo mediante Aprendizaje-Servicio',
+    status: 'completado',
+    description:
+      'Desarrollo inicial junto a Fundación AFIM Salamanca dentro de las asignaturas Diseño, Evaluación y Desarrollo de Interfaces y Servicios y Plataformas Web.',
+    details: [
+      'Investigación de necesidades',
+      'Visitas y contacto con Fundación AFIM',
+      'Diseño de interfaces en Figma',
+      'Creación de identidad visual y personajes',
+      'Primer desarrollo con Angular, Node.js y MongoDB',
+      'Matrícula de Honor en ambas asignaturas',
+    ],
+  },
+  {
+    id: 'gala-inclusiva-talentos',
+    date: '13 de mayo de 2025',
+    title: 'Presentación en la I Gala Inclusiva de Talentos',
+    status: 'completado',
+    description:
+      'ISAAC fue presentado públicamente en la I Gala Inclusiva de Talentos, celebrada junto a Fundación AFIM Salamanca, como resultado del trabajo desarrollado durante el proyecto de Aprendizaje-Servicio.',
+    details: [
+      'Presentación pública del primer prototipo',
+      'Participación de Fundación AFIM Salamanca',
+      'Divulgación del proyecto ante la comunidad',
+      'Primera exposición de la propuesta fuera del aula',
+      'Puesta en valor de la tecnología aplicada a la inclusión',
+      'Cierre visible de la primera etapa del proyecto',
+    ],
+    highlight: 'Del aula a una primera presentación pública con impacto social.',
+    imageSrc: '/images/project/inclusive-talents-gala.webp',
+    imageAlt: 'Presentación de ISAAC en la I Gala Inclusiva de Talentos del 13 de mayo de 2025',
+    icon: 'presentation',
+  },
+  {
+    id: 'talent',
+    date: 'Noviembre de 2025',
+    title: 'Selección como Proyecto TALENT',
+    status: 'completado',
+    description:
+      'ISAAC fue seleccionado en la convocatoria TALENT 2025-2026 del Plan TCUE para impulsar el desarrollo de prototipos innovadores con posibilidades de transferencia.',
+    details: [
+      'Puntuación de 86,29 sobre 100',
+      'Respaldo formal de Fundación AFIM Salamanca',
+      'Orientación hacia innovación y transferencia',
+      'Preparación de una nueva etapa de desarrollo',
+    ],
+    imageSrc: '/images/project/talent-project.webp',
+    imageAlt: 'Presentación de ISAAC como Proyecto TALENT del Plan TCUE',
+  },
+  {
+    id: 'sistema-completo',
+    date: 'Enero-junio de 2026',
+    title: 'Desarrollo del sistema completo',
+    status: 'completado',
+    description:
+      'Durante el proyecto TALENT y el Trabajo de Fin de Grado, el primer prototipo evolucionó hasta convertirse en una plataforma web funcional y modular.',
+    details: [
+      'Arquitectura completa',
+      'Perfiles, roles y permisos',
+      'Board Builder',
+      'Comunicador',
+      'Personalización de pictogramas',
+      'Inteligencia artificial',
+      'Registro OBL',
+      'Estadísticas',
+      'Objetivos comunicativos',
+      'Voz personalizada',
+      'Interoperabilidad',
+    ],
+  },
+  {
+    id: 'explorer-training',
+    date: 'Enero-abril de 2026',
+    title: 'Santander X Explorer Training',
+    status: 'completado',
+    description:
+      'ISAAC fue seleccionado para participar en un programa de doce semanas orientado a transformar proyectos en soluciones con una propuesta de valor y un modelo de negocio sostenible.',
+    details: [
+      '12 semanas de formación',
+      'Propuesta de valor',
+      'Segmentación de clientes',
+      'Impacto social',
+      'Modelo de negocio',
+      'Mercado y competencia',
+      'Escalabilidad',
+      'Preparación del pitch',
+    ],
+    imageSrc: '/images/project/explorer-training.webp',
+    imageAlt: 'Sesión de formación del programa Santander X Explorer Training',
+  },
+  {
+    id: 'santander-x-upsa',
+    date: '30 de junio de 2026',
+    title: 'Ganador de Santander X Spain Awards en la UPSA',
+    status: 'completado',
+    description:
+      'ISAAC fue elegido en la jornada final de la Universidad Pontificia de Salamanca para representar a la universidad en la siguiente fase nacional de Santander X.',
+    highlight: 'De proyecto universitario a representante de la UPSA.',
+    imageSrc: '/images/project/santander-final.webp',
+    imageAlt: 'Jornada final de Santander X Spain Awards en la Universidad Pontificia de Salamanca',
+  },
+  {
+    id: 'registro-software',
+    date: 'Julio de 2026',
+    title: 'Registro del software',
+    status: 'proximo',
+    description: 'Registro del software y avance en la protección de la propiedad intelectual de ISAAC.',
+  },
+  {
+    id: 'publicacion-cientifica',
+    date: 'Septiembre de 2026',
+    title: 'Publicación científica',
+    status: 'previsto',
+    description:
+      'Preparación y publicación de resultados relacionados con el diseño, desarrollo y aplicación de ISAAC.',
+  },
+  {
+    id: 'santander-x-nacional',
+    date: 'Septiembre-octubre de 2026',
+    title: 'Fase nacional de Santander X',
+    status: 'previsto',
+    description: 'Participación en la convocatoria nacional representando a la Universidad Pontificia de Salamanca.',
+  },
+];

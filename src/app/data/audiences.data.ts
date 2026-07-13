@@ -5,8 +5,7 @@ export const audiences: Audience[] = [
     id: 'personas-usuarias',
     shortTitle: 'Personas usuarias',
     title: 'Una forma más personal de expresarse',
-    shortDescription:
-      'Construye mensajes mediante pictogramas, reproduce frases por voz y utiliza tableros adaptados a su vocabulario y forma de comunicarse.',
+    shortDescription: 'Comunicar mediante pictogramas, voz y tableros personales.',
     longDescription:
       'ISAAC ofrece a la persona un comunicador visual desde el que puede seleccionar pictogramas, construir frases, navegar entre tableros y emitir el mensaje mediante voz. Los tableros pueden incorporar vocabulario e imágenes significativas para su entorno y sus rutinas.',
     icon: 'user-round',
@@ -39,8 +38,7 @@ export const audiences: Audience[] = [
     id: 'familias',
     shortTitle: 'Familias',
     title: 'Continuidad en la comunicación cotidiana',
-    shortDescription:
-      'Incorpora vocabulario cercano, participa en los objetivos y comparte observaciones sobre la comunicación diaria.',
+    shortDescription: 'Participar en la personalización y el seguimiento cotidiano.',
     longDescription:
       'Las familias pueden contribuir a que el sistema represente mejor la realidad de la persona, incorporando imágenes, personas, objetos, lugares y rutinas significativas. También pueden colaborar en el seguimiento cuando dispongan de los permisos correspondientes.',
     icon: 'heart-handshake',
@@ -73,8 +71,7 @@ export const audiences: Audience[] = [
     id: 'profesionales',
     shortTitle: 'Profesionales',
     title: 'Herramientas para diseñar, acompañar y revisar',
-    shortDescription:
-      'Crea tableros, personaliza vocabulario, analiza el uso del sistema y define objetivos comunicativos.',
+    shortDescription: 'Diseñar, acompañar y revisar la comunicación.',
     longDescription:
       'ISAAC reúne herramientas de autoría, comunicación y seguimiento para que los profesionales puedan preparar recursos adaptados, revisar su uso y documentar objetivos y observaciones dentro de una misma plataforma.',
     icon: 'briefcase',
@@ -110,8 +107,7 @@ export const audiences: Audience[] = [
     id: 'organizaciones',
     shortTitle: 'Organizaciones',
     title: 'Gestión coordinada para equipos y centros',
-    shortDescription:
-      'Centraliza usuarios, profesionales, permisos, tableros y seguimiento dentro de un entorno compartido.',
+    shortDescription: 'Coordinar usuarios, permisos, recursos y seguimiento.',
     longDescription:
       'ISAAC permite que una organización gestione las relaciones entre profesionales, familiares y usuarios finales. La plataforma facilita la administración de permisos, recursos comunicativos y datos de seguimiento respetando el acceso autorizado de cada perfil.',
     icon: 'building-2',

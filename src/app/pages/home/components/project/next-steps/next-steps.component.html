@@ -1,0 +1,35 @@
+<div class="next-steps" appScrollReveal>
+  <h3 class="next-steps__title">{{ steps.title }}</h3>
+
+  <div class="next-steps__grid">
+    <div class="next-steps__block next-steps__block--scheduled">
+      <h4 class="next-steps__block-title">Hitos programados</h4>
+      <ul class="next-steps__list">
+        @for (item of steps.scheduled; track item.label) {
+          <li>
+            <svg lucideCalendarClock aria-hidden="true"></svg>
+            <span>
+              <strong>{{ item.date }}</strong> — {{ item.label }}
+              <em class="next-steps__tag">Previsto</em>
+            </span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="next-steps__block next-steps__block--evolution">
+      <h4 class="next-steps__block-title">Líneas de evolución</h4>
+      <ul class="next-steps__list">
+        @for (line of steps.evolutionLines; track line) {
+          <li>
+            <svg lucideTrendingUp aria-hidden="true"></svg>
+            <span>
+              {{ line }}
+              <em class="next-steps__tag">Próximo objetivo</em>
+            </span>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</div>

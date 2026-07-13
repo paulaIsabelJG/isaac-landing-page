@@ -8,19 +8,40 @@ const CYCLE_LINK = {
 export const features: Feature[] = [
   {
     id: 'tableros-flexibles',
+    step: '01',
+    shortTitle: 'Tableros flexibles',
     title: 'Tableros preparados para diferentes formas de comunicación',
-    shortDescription:
-      'Crea tableros en cuadrícula, circulares y multitableros, con navegación entre pantallas y barras de control configurables.',
-    longDescription:
-      'ISAAC incorpora un Board Builder desde el que profesionales y organizaciones pueden crear, modificar, organizar y asignar tableros de comunicación. El editor permite trabajar con diferentes disposiciones para adaptar la navegación, el número de elementos visibles y la organización del vocabulario a las necesidades de cada persona.',
+    description:
+      'ISAAC incorpora un Board Builder desde el que profesionales y organizaciones pueden crear, modificar, organizar y asignar tableros de comunicación.',
     icon: 'layout-grid',
     accent: 'primary',
     tag: 'Cuadrícula · Circular · Multitablero',
-    imageSrc: '/images/features/boards-overview.webp',
-    imageAlt: 'Vista general del Board Builder de ISAAC',
-    secondaryImageSrc: '/images/features/board-types.webp',
-    secondaryImageAlt: 'Ejemplos de tablero en cuadrícula, circular y multitablero',
-    bullets: [
+    capabilities: ['Cuadrícula', 'Circular', 'Multitablero', 'Navegación entre pantallas', 'Barras de control'],
+    highlight:
+      'Un mismo sistema permite crear desde un tablero sencillo hasta una red completa de tableros conectados.',
+    images: [
+      {
+        src: '/images/features/boards-grid.webp',
+        alt: 'Tablero en cuadrícula de ISAAC',
+        label: 'Cuadrícula',
+      },
+      {
+        src: '/images/features/boards-circular.webp',
+        alt: 'Tablero circular de ISAAC',
+        label: 'Circular',
+      },
+      {
+        src: '/images/features/boards-multiboard.webp',
+        alt: 'Multitablero de ISAAC',
+        label: 'Multitablero',
+      },
+      {
+        src: '/images/features/boards-builder.webp',
+        alt: 'Editor Board Builder de ISAAC',
+        label: 'Editor',
+      },
+    ],
+    detailedCapabilities: [
       'Creación de tableros principales y secundarios',
       'Tableros en cuadrícula con filas y columnas configurables',
       'Tableros circulares con distribución radial',
@@ -32,6 +53,8 @@ export const features: Feature[] = [
       'Vista previa antes de utilizar el tablero',
       'Exportación a OBF, OBZ y PDF',
     ],
+    longDescription:
+      'El editor permite trabajar con diferentes disposiciones para adaptar la navegación, el número de elementos visibles y la organización del vocabulario a las necesidades de cada persona.',
     workflow: [
       'Elegir el tipo y la forma del tablero',
       'Configurar su estructura',
@@ -41,27 +64,45 @@ export const features: Feature[] = [
       'Asignar el tablero a uno o varios usuarios',
       'Previsualizar, exportar o utilizarlo en el comunicador',
     ],
-    highlight:
-      'Un mismo sistema permite crear desde un tablero sencillo hasta una red completa de tableros conectados.',
-    technicalNote:
-      'Los tableros pueden exportarse en formatos abiertos OBF y OBZ o como documento PDF.',
+    technicalNote: 'Los tableros pueden exportarse en formatos abiertos OBF y OBZ o como documento PDF.',
     ...CYCLE_LINK,
   },
   {
     id: 'personalizacion-real',
+    step: '02',
+    shortTitle: 'Personalización',
     title: 'Cada tablero puede reflejar la realidad de la persona',
-    shortDescription:
-      'Adapta pictogramas, imágenes propias, etiquetas, colores, vocalizaciones y vocabulario a la realidad de cada persona.',
-    longDescription:
-      'ISAAC evita que los tableros sean recursos genéricos y cerrados. Cada usuario puede disponer de pictogramas, imágenes, etiquetas, sonidos y configuraciones propias. Los elementos genéricos pueden sustituirse automáticamente por pictogramas personales asociados a personas, objetos, lugares o rutinas significativas.',
+    description:
+      'ISAAC evita que los tableros sean recursos genéricos y cerrados. Cada usuario puede disponer de pictogramas, imágenes, etiquetas, sonidos y configuraciones propias.',
     icon: 'user-round-cog',
     accent: 'secondary',
     tag: 'Vocabulario e imágenes propias',
-    imageSrc: '/images/features/personalization-before.webp',
-    imageAlt: 'Tablero con pictogramas genéricos antes de la personalización',
-    secondaryImageSrc: '/images/features/personalization-after.webp',
-    secondaryImageAlt: 'Tablero adaptado con pictogramas propios del usuario',
-    bullets: [
+    capabilities: [
+      'Pictogramas propios',
+      'Fotografías personales',
+      'Colores gramaticales Fitzgerald',
+      'Vocalizaciones propias',
+      'Sustitución automática',
+    ],
+    highlight: 'Un pictograma genérico representa un concepto; una imagen personal puede representar una experiencia concreta.',
+    images: [
+      {
+        src: '/images/features/personalization-before.webp',
+        alt: 'Tablero genérico antes de personalizarlo',
+        label: 'Antes',
+      },
+      {
+        src: '/images/features/personalization-after.webp',
+        alt: 'Tablero adaptado con pictogramas propios',
+        label: 'Después',
+      },
+      {
+        src: '/images/features/custom-pictograms.webp',
+        alt: 'Gestión de pictogramas personalizados',
+        label: 'Pictogramas propios',
+      },
+    ],
+    detailedCapabilities: [
       'Búsqueda e incorporación de pictogramas de ARASAAC',
       'Creación y gestión de pictogramas propios',
       'Sustitución automática de pictogramas genéricos',
@@ -73,6 +114,8 @@ export const features: Feature[] = [
       'Adaptación de tableros genéricos a cada usuario',
       'Configuración individual de voz y sonido',
     ],
+    longDescription:
+      'Los elementos genéricos pueden sustituirse automáticamente por pictogramas personales asociados a personas, objetos, lugares o rutinas significativas.',
     workflow: [
       'Crear o seleccionar un tablero genérico',
       'Asociarlo a un usuario final',
@@ -81,27 +124,45 @@ export const features: Feature[] = [
       'Ajustar etiquetas, colores y vocalizaciones',
       'Utilizar el tablero personalizado en la sesión',
     ],
-    highlight:
-      'Un pictograma genérico representa un concepto; una imagen personal puede representar una experiencia concreta.',
     technicalNote:
       'La aplicación mantiene una versión genérica del tablero y genera una visualización adaptada al usuario cuando se utiliza en el comunicador.',
     ...CYCLE_LINK,
   },
   {
     id: 'apoyo-inteligente',
+    step: '03',
+    shortTitle: 'Apoyo inteligente',
     title: 'Inteligencia artificial al servicio de la intención comunicativa',
-    shortDescription:
-      'Utiliza predicción de pictogramas y reformulación de frases para reducir esfuerzo sin sustituir la intención comunicativa.',
-    longDescription:
-      'ISAAC incorpora distintas funciones de inteligencia artificial para apoyar la construcción de mensajes. El sistema puede sugerir posibles pictogramas, adaptar las propuestas a la frase activa y transformar secuencias telegráficas en expresiones más naturales. Todas estas funciones son opcionales y parten siempre de las selecciones realizadas por la persona.',
+    description:
+      'ISAAC incorpora distintas funciones de inteligencia artificial para apoyar la construcción de mensajes, siempre como apoyo opcional y nunca como sustituto de la decisión de la persona.',
     icon: 'brain-circuit',
     accent: 'coral',
     tag: 'Predicción · Circular · Reformulación',
-    imageSrc: '/images/features/ai-prediction.webp',
-    imageAlt: 'Predicción de pictogramas en el comunicador ISAAC',
-    secondaryImageSrc: '/images/features/ai-reformulation.webp',
-    secondaryImageAlt: 'Reformulación de una frase mediante inteligencia artificial',
-    bullets: [
+    capabilities: [
+      'Predicción de pictogramas',
+      'Tablero circular predictivo',
+      'Reformulación de frases',
+      'Sugerencias opcionales',
+    ],
+    highlight: 'La inteligencia artificial propone; la persona decide.',
+    images: [
+      {
+        src: '/images/features/ai-prediction.webp',
+        alt: 'Predicción de pictogramas en ISAAC',
+        label: 'Predicción',
+      },
+      {
+        src: '/images/features/ai-circular.webp',
+        alt: 'Tablero circular predictivo de ISAAC',
+        label: 'Circular',
+      },
+      {
+        src: '/images/features/ai-reformulation.webp',
+        alt: 'Reformulación de frases en ISAAC',
+        label: 'Reformulación',
+      },
+    ],
+    detailedCapabilities: [
       'Predictor de próximos pictogramas',
       'Análisis de la frase activa',
       'Uso de palabras seleccionadas anteriormente',
@@ -114,6 +175,8 @@ export const features: Feature[] = [
       'Asociación entre la frase reformulada y los pictogramas originales',
       'Posibilidad de aceptar o rechazar las sugerencias',
     ],
+    longDescription:
+      'El sistema puede sugerir posibles pictogramas, adaptar las propuestas a la frase activa y transformar secuencias telegráficas en expresiones más naturales. Todas estas funciones son opcionales y parten siempre de las selecciones realizadas por la persona.',
     workflow: [
       'La persona comienza a construir una frase',
       'ISAAC analiza los conceptos ya seleccionados',
@@ -123,26 +186,40 @@ export const features: Feature[] = [
       'La frase final se mantiene vinculada a la selección original',
       'El mensaje puede reproducirse mediante voz',
     ],
-    highlight: 'La inteligencia artificial propone; la persona decide.',
     technicalNote:
       'El predictor, el tablero circular y la reformulación funcionan como apoyos opcionales y mantienen la selección del usuario como base del proceso.',
     ...CYCLE_LINK,
   },
   {
     id: 'voz-adaptada',
+    step: '04',
+    shortTitle: 'Voz y salida auditiva',
     title: 'Convertir una secuencia visual en un mensaje oral',
-    shortDescription:
-      'Reproduce los mensajes mediante voz y permite configurar una salida auditiva ajustada a cada usuario.',
-    longDescription:
-      'ISAAC permite reproducir oralmente las frases construidas con pictogramas. La salida auditiva puede utilizar voces disponibles en el dispositivo, voces seleccionadas de un catálogo o una voz personalizada vinculada al perfil del usuario.',
+    description:
+      'ISAAC permite reproducir oralmente las frases construidas con pictogramas, con una salida auditiva ajustada a cada usuario.',
     icon: 'audio-lines',
     accent: 'green',
     tag: 'Voz local o personalizada',
-    imageSrc: '/images/features/voice-settings.webp',
-    imageAlt: 'Configuración de voz y sonido en el perfil de usuario',
-    secondaryImageSrc: '/images/features/voice-communication.webp',
-    secondaryImageAlt: 'Reproducción oral de una frase construida con pictogramas',
-    bullets: [
+    capabilities: [
+      'Voz local del dispositivo',
+      'Catálogo de voces',
+      'Voz personalizada (OpenVoice)',
+      'Vocalización por pictograma',
+    ],
+    highlight: 'La voz no es solo una salida técnica: forma parte de la identidad comunicativa de la persona.',
+    images: [
+      {
+        src: '/images/features/voice-settings.webp',
+        alt: 'Configuración de voz del usuario',
+        label: 'Configuración',
+      },
+      {
+        src: '/images/features/voice-communication.webp',
+        alt: 'Reproducción oral de una frase',
+        label: 'Reproducción',
+      },
+    ],
+    detailedCapabilities: [
       'Reproducción completa de la frase activa',
       'Voz local del dispositivo',
       'Selección de voz del catálogo',
@@ -154,6 +231,8 @@ export const features: Feature[] = [
       'Controles para hablar, borrar y limpiar',
       'Aplicación automática de la voz configurada durante la sesión',
     ],
+    longDescription:
+      'La salida auditiva puede utilizar voces disponibles en el dispositivo, voces seleccionadas de un catálogo o una voz personalizada vinculada al perfil del usuario.',
     workflow: [
       'El usuario construye una frase',
       'ISAAC obtiene el texto que debe reproducirse',
@@ -162,26 +241,46 @@ export const features: Feature[] = [
       'Genera o recupera el audio',
       'Reproduce el mensaje hacia el entorno',
     ],
-    highlight: 'La voz no es solo una salida técnica: forma parte de la identidad comunicativa de la persona.',
     technicalNote:
       'La voz personalizada es una opción que se integra mediante un servicio externo basado en OpenVoice cuando está configurada, y utiliza caché para reducir tiempos de respuesta.',
     ...CYCLE_LINK,
   },
   {
     id: 'seguimiento-profesional',
+    step: '05',
+    shortTitle: 'Seguimiento',
     title: 'De la comunicación diaria al seguimiento estructurado',
-    shortDescription:
-      'Consulta estadísticas, reconstruye frases, define objetivos y añade comentarios para orientar la intervención.',
-    longDescription:
-      'ISAAC registra las interacciones realizadas durante las sesiones y transforma esos eventos en información comprensible. Profesionales y organizaciones pueden revisar el uso de los tableros, reconstruir frases, analizar la actividad y relacionar los resultados con objetivos comunicativos.',
+    description:
+      'ISAAC registra las interacciones realizadas durante las sesiones y transforma esos eventos en información comprensible para profesionales y familias.',
     icon: 'chart-no-axes-combined',
     accent: 'yellow',
     tag: 'OBL · Estadísticas · Objetivos',
-    imageSrc: '/images/features/analytics-dashboard.webp',
-    imageAlt: 'Panel de estadísticas de ISAAC',
-    secondaryImageSrc: '/images/features/objectives.webp',
-    secondaryImageAlt: 'Creación y seguimiento de objetivos comunicativos',
-    bullets: [
+    capabilities: [
+      'Registro de eventos OBL',
+      'Estadísticas de uso',
+      'Reconstrucción de frases',
+      'Objetivos comunicativos',
+      'Comentarios profesionales',
+    ],
+    highlight: 'Los datos no sustituyen la observación profesional; ayudan a documentarla y complementarla.',
+    images: [
+      {
+        src: '/images/features/analytics-dashboard.webp',
+        alt: 'Panel de estadísticas de ISAAC',
+        label: 'Estadísticas',
+      },
+      {
+        src: '/images/features/reconstructed-phrases.webp',
+        alt: 'Frases reconstruidas a partir de eventos OBL',
+        label: 'Frases',
+      },
+      {
+        src: '/images/features/objectives.webp',
+        alt: 'Objetivos comunicativos en ISAAC',
+        label: 'Objetivos',
+      },
+    ],
+    detailedCapabilities: [
       'Registro de eventos OBL',
       'Pictogramas seleccionados',
       'Orden de selección',
@@ -201,6 +300,8 @@ export const features: Feature[] = [
       'Comentarios de profesionales o familiares',
       'Seguimiento de la evolución',
     ],
+    longDescription:
+      'Profesionales y organizaciones pueden revisar el uso de los tableros, reconstruir frases, analizar la actividad y relacionar los resultados con objetivos comunicativos.',
     workflow: [
       'La persona utiliza el comunicador',
       'ISAAC registra eventos OBL durante la sesión',
@@ -210,26 +311,40 @@ export const features: Feature[] = [
       'Se crean o actualizan objetivos',
       'Los resultados pueden utilizarse para volver a adaptar el tablero',
     ],
-    highlight: 'Los datos no sustituyen la observación profesional; ayudan a documentarla y complementarla.',
     technicalNote:
       'Los objetivos pueden orientarse a ampliar vocabulario funcional, favorecer la expresión de preferencias, mejorar la participación en rutinas o fomentar la construcción de frases. No sustituyen un diagnóstico ni una intervención clínica: son una herramienta de apoyo al seguimiento.\n\nModo oculto: el comunicador puede abrirse en modo oculto para probar un tablero, revisar su navegación o comprobar la voz sin que esas acciones se incorporen al historial ni alteren las estadísticas.',
     ...CYCLE_LINK,
   },
   {
     id: 'interoperabilidad',
+    step: '06',
+    shortTitle: 'Interoperabilidad',
     title: 'Información preparada para entrar y salir de la plataforma',
-    shortDescription:
-      'Importa, exporta y registra información mediante formatos abiertos como OBF, OBZ, OBL y OBLA.',
-    longDescription:
-      'ISAAC utiliza formatos abiertos para facilitar la reutilización de tableros, el intercambio de información y la conservación de los registros. Los tableros pueden importarse desde otras herramientas compatibles, continuar editándose y volver a exportarse en diferentes formatos.',
+    description:
+      'ISAAC utiliza formatos abiertos para facilitar la reutilización de tableros, el intercambio de información y la conservación de los registros.',
     icon: 'share-2',
     accent: 'primary',
     tag: 'OBF · OBZ · OBL · OBLA · PDF',
-    imageSrc: '/images/features/interoperability-formats.webp',
-    imageAlt: 'Formatos abiertos compatibles con ISAAC',
-    secondaryImageSrc: '/images/features/pdf-export.webp',
-    secondaryImageAlt: 'Informe PDF de estadísticas generado desde ISAAC',
-    bullets: [
+    capabilities: ['Importar y exportar OBF/OBZ', 'Registro OBL', 'Exportación anonimizada OBLA', 'Informes en PDF'],
+    highlight: 'Los materiales y los datos no quedan encerrados dentro de ISAAC.',
+    images: [
+      {
+        src: '/images/features/import-obz.webp',
+        alt: 'Importación de tableros OBZ',
+        label: 'Importación',
+      },
+      {
+        src: '/images/features/interoperability-formats.webp',
+        alt: 'Formatos abiertos compatibles con ISAAC',
+        label: 'Formatos',
+      },
+      {
+        src: '/images/features/pdf-export.webp',
+        alt: 'Informe PDF generado desde ISAAC',
+        label: 'PDF',
+      },
+    ],
+    detailedCapabilities: [
       'Importación de tableros OBF',
       'Importación de paquetes OBZ',
       'Edición de tableros importados',
@@ -243,6 +358,8 @@ export const features: Feature[] = [
       'Inclusión de gráficos y frases reconstruidas',
       'Uso de los datos fuera de la plataforma',
     ],
+    longDescription:
+      'Los tableros pueden importarse desde otras herramientas compatibles, continuar editándose y volver a exportarse en diferentes formatos.',
     workflow: [
       'Importar un tablero existente',
       'Personalizarlo en ISAAC',
@@ -251,7 +368,6 @@ export const features: Feature[] = [
       'Exportar datos en OBLA o PDF',
       'Compartir o reutilizar la información fuera de la aplicación',
     ],
-    highlight: 'Los materiales y los datos no quedan encerrados dentro de ISAAC.',
     technicalNote:
       '¿Qué significa cada formato?\nOBF: formato abierto para un tablero individual.\nOBZ: paquete comprimido con varios tableros y recursos.\nOBL: formato estructurado para registrar interacciones.\nOBLA: exportación anonimizada de los registros de actividad.\nPDF: versión visual preparada para revisión, impresión o informes.\n\nEl informe PDF está orientado a la lectura humana, mientras que OBLA mantiene información estructurada para análisis, respaldo o reutilización posterior. La interoperabilidad se ofrece con formatos abiertos y herramientas compatibles, sin garantizar compatibilidad universal con cualquier aplicación externa.',
     ...CYCLE_LINK,

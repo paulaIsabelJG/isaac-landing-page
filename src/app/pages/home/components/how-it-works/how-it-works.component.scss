@@ -1,0 +1,222 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.how-it-works {
+  @include section-spacing;
+  background-color: $color-bg-alt;
+}
+
+// ---------------------------------------------------------------
+// Resumen visual muy compacto: mapa del ciclo, no una segunda
+// explicación. Móvil = fila con overflow-x; tablet = cuadrícula 3x2;
+// escritorio = fila única de 6 con línea + corchete de retorno.
+// ---------------------------------------------------------------
+.how-it-works__diagram {
+  position: relative;
+  margin-top: $space-xl;
+}
+
+.how-it-works__row {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0 $space-3xs $space-2xs;
+  display: flex;
+  gap: $space-lg;
+  overflow-x: auto;
+  scroll-padding-inline: $space-md;
+  -webkit-overflow-scrolling: touch;
+
+  // Línea de conexión entre pasos: un único trazo continuo detrás de los
+  // círculos (el orden de lectura y los números ya indican la secuencia,
+  // el color nunca es el único indicador).
+  &::before {
+    content: '';
+    position: absolute;
+    top: 1.625rem;
+    left: 2.75rem;
+    right: 2.75rem;
+    height: 2px;
+    background-color: $color-border-strong;
+    z-index: 0;
+  }
+
+  @include respond-to(md) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: $space-lg;
+    overflow-x: visible;
+    padding: 0;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  @include respond-to(lg) {
+    display: flex;
+    overflow-x: visible;
+
+    &::before {
+      // Centro del primer y último círculo con 6 columnas iguales:
+      // (0 + 0.5) / 6 = 8.33%.
+      left: 8.33%;
+      right: 8.33%;
+    }
+  }
+}
+
+.how-it-works__step {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  min-width: 8.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3xs;
+  text-align: center;
+  padding: $space-3xs;
+
+  @include respond-to(md) {
+    min-width: 0;
+  }
+
+  // Columnas iguales en la fila única de escritorio: necesario para que
+  // el corchete de retorno pueda calcularse con un porcentaje fijo.
+  @include respond-to(lg) {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: $space-2xs;
+  }
+}
+
+.how-it-works__circle {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: $radius-full;
+  background-color: $color-border-strong;
+  color: $color-text;
+  box-shadow: $shadow-sm;
+}
+
+.how-it-works__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.how-it-works__number {
+  position: absolute;
+  bottom: -0.3rem;
+  right: -0.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: $radius-full;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  color: $color-text;
+  font-size: 0.625rem;
+  font-weight: $font-weight-bold;
+}
+
+.how-it-works__label {
+  @include type-small;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.how-it-works__summary {
+  @include type-small;
+  font-size: 0.75rem;
+  color: $color-text-muted;
+  max-width: 12rem;
+  // Sin recorte de líneas: son frases de una sola oración ya muy breves;
+  // truncarlas con ellipsis perdería palabras clave (p. ej. "mediante OBL").
+}
+
+// Acentos: solo tiñen el círculo. Número, icono y etiqueta ya distinguen
+// cada paso sin depender del color.
+.how-it-works__step--primary .how-it-works__circle {
+  background-color: $color-primary;
+  color: $color-text-on-primary;
+}
+
+.how-it-works__step--secondary .how-it-works__circle {
+  background-color: $color-secondary;
+  color: $color-text-on-primary;
+}
+
+.how-it-works__step--green .how-it-works__circle {
+  background-color: $color-accent-green;
+  color: $color-text;
+}
+
+.how-it-works__step--yellow .how-it-works__circle {
+  background-color: $color-accent-yellow;
+  color: $color-text;
+}
+
+.how-it-works__step--coral .how-it-works__circle {
+  background-color: $color-accent-coral;
+  color: $color-text;
+}
+
+// ---------------------------------------------------------------
+// Corchete de retorno (Objetivos → Personalizar): solo en la fila única
+// de escritorio; en tablet/móvil el texto con icono de abajo ya deja
+// clara la vuelta del ciclo.
+// ---------------------------------------------------------------
+.how-it-works__loop-bracket {
+  display: none;
+
+  @include respond-to(lg) {
+    display: block;
+    position: absolute;
+    top: calc(100% + #{$space-2xs});
+    left: 25%;
+    right: 8.34%;
+    height: 1.1rem;
+    border: 2px dashed $color-secondary;
+    border-top: none;
+    border-radius: 0 0 $radius-md $radius-md;
+    opacity: 0.6;
+  }
+}
+
+.how-it-works__loop-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2xs;
+  margin: $space-lg auto 0;
+  max-width: 52ch;
+  text-align: center;
+  @include type-small;
+  color: $color-text-muted;
+
+  svg {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    color: $color-secondary;
+  }
+
+  strong {
+    color: $color-secondary;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.how-it-works__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: $space-xl;
+}

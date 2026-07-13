@@ -1,0 +1,197 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.timeline-block__title {
+  @include type-h3;
+  color: $color-text;
+  margin-bottom: $space-xl;
+}
+
+// ---------------------------------------------------------------
+// Mobile-first: línea vertical a la izquierda, eventos alineados.
+// ---------------------------------------------------------------
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.timeline__item {
+  position: relative;
+  padding-left: 2.75rem;
+  padding-bottom: $space-xl;
+}
+
+.timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline__item::before {
+  content: '';
+  position: absolute;
+  left: 0.6875rem;
+  top: 1.75rem;
+  bottom: 0;
+  width: 2px;
+  background-color: $color-border;
+}
+
+.timeline__item:last-child::before {
+  display: none;
+}
+
+.timeline__marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: $radius-full;
+  background-color: $color-surface;
+  border: 2px solid $color-border-strong;
+  color: $color-text-muted;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+.timeline__marker--completado {
+  border-color: $color-success;
+  color: $color-success;
+}
+
+.timeline__marker--proximo {
+  border-color: $color-primary;
+  color: $color-primary;
+}
+
+.timeline__marker--previsto {
+  border-color: $color-text-muted;
+  color: $color-text-muted;
+}
+
+.timeline__card {
+  @include card-base;
+}
+
+.timeline__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-sm;
+  margin-bottom: $space-2xs;
+}
+
+.timeline__date {
+  @include type-eyebrow;
+  color: $color-text-muted;
+}
+
+// El estado nunca depende solo del color: cada uno lleva icono propio
+// y una etiqueta de texto ("Completado" / "Próximo hito" / "Previsto").
+.timeline__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  @include type-small;
+  font-weight: $font-weight-semibold;
+  padding: 0.15rem 0.6rem;
+  border-radius: $radius-full;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+.timeline__status--completado {
+  color: $color-success;
+  background-color: rgba($color-success, 0.1);
+}
+
+.timeline__status--proximo {
+  color: $color-primary;
+  background-color: rgba($color-primary, 0.1);
+}
+
+.timeline__status--previsto {
+  color: $color-text-muted;
+  background-color: rgba($color-text-muted, 0.12);
+}
+
+.timeline__title {
+  @include type-h3;
+  font-size: $font-size-h3;
+  color: $color-text;
+  margin-bottom: $space-2xs;
+}
+
+.timeline__description {
+  @include type-body;
+  color: $color-text-muted;
+  margin-bottom: $space-sm;
+}
+
+.timeline__image {
+  margin-bottom: $space-sm;
+}
+
+.timeline__details {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0 0 $space-sm;
+  padding-left: 1.25rem;
+  @include type-small;
+  color: $color-text;
+}
+
+.timeline__highlight {
+  @include type-body;
+  font-style: italic;
+  color: $color-text;
+  border-left: 3px solid $color-primary;
+  padding-left: $space-sm;
+  margin: 0;
+}
+
+// ---------------------------------------------------------------
+// Escritorio: línea central, eventos alternados izquierda/derecha.
+// ---------------------------------------------------------------
+@include respond-to(lg) {
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 1fr 2.75rem 1fr;
+    align-items: start;
+    padding-left: 0;
+    padding-bottom: $space-2xl;
+  }
+
+  .timeline__item::before {
+    left: calc(50% - 1px);
+    top: 1.75rem;
+  }
+
+  .timeline__marker {
+    position: static;
+    grid-column: 2;
+    justify-self: center;
+    margin-top: 0.125rem;
+  }
+
+  .timeline__card {
+    grid-column: 1;
+    margin-right: $space-xl;
+  }
+
+  .timeline__item--right .timeline__card {
+    grid-column: 3;
+    margin-right: 0;
+    margin-left: $space-xl;
+  }
+}

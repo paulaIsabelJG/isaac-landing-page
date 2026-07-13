@@ -18,8 +18,10 @@ const AUDIENCE_ICONS: Record<string, LucideIconInput> = {
   'building-2': LucideBuilding2,
 };
 
-// Duración de cada mitad de la transición (fade-out y fade-in).
-const TRANSITION_STEP_MS = 150;
+// Duración de cada mitad de la transición (fade-out y fade-in). 190ms +
+// 190ms de CSS quedan dentro del rango de 300-450ms pedido para el ciclo
+// completo de cambio de perfil.
+const TRANSITION_STEP_MS = 190;
 
 @Component({
   selector: 'app-audience-detail',

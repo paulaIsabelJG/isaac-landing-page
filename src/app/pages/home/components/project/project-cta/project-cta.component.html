@@ -1,0 +1,22 @@
+<div id="final-cta" class="project-cta">
+  <h3 class="project-cta__title">ISAAC sigue creciendo</h3>
+  <p class="project-cta__text">
+    Buscamos organizaciones, profesionales y familias interesadas en conocer el sistema, participar en futuras
+    pruebas y contribuir a su evolución.
+  </p>
+
+  <div class="project-cta__actions">
+    <app-button
+      variant="primary"
+      size="lg"
+      [icon]="arrowRightIcon"
+      iconPosition="right"
+      (click)="goToContact()"
+    >
+      Solicitar una demo
+    </app-button>
+    <app-button variant="ghost" size="lg" [routerLink]="['/como-funciona']">
+      Descubrir cómo funciona
+    </app-button>
+  </div>
+</div>

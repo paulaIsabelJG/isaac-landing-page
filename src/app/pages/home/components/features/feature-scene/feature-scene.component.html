@@ -1,0 +1,81 @@
+<article
+  class="scene"
+  [class]="'scene scene--' + feature().accent"
+  [attr.aria-labelledby]="titleId()"
+  appScrollReveal
+  [threshold]="0.2"
+>
+  <div class="scene__inner">
+    <div class="scene__meta">
+      <span class="scene__step" aria-hidden="true">{{ feature().step }}</span>
+      <span class="scene__icon" aria-hidden="true">
+        <svg [lucideIcon]="icon()"></svg>
+      </span>
+    </div>
+
+    <p class="scene__eyebrow">{{ feature().shortTitle }}</p>
+    <h3 class="scene__title" [id]="titleId()">«{{ feature().title }}»</h3>
+    <p class="scene__description">{{ feature().description }}</p>
+
+    <app-safe-image
+      class="scene__image"
+      [src]="feature().images[0].src"
+      [alt]="feature().images[0].alt"
+      [placeholderTitle]="feature().shortTitle"
+      [placeholderDescription]="'Añade la imagen en public' + feature().images[0].src"
+      aspectRatio="16 / 10"
+      rounded="lg"
+    />
+
+    <ul class="scene__capabilities">
+      @for (capability of feature().capabilities; track capability) {
+        <li>
+          <svg lucideCheck aria-hidden="true"></svg>
+          <span>{{ capability }}</span>
+        </li>
+      }
+    </ul>
+
+    <blockquote class="scene__highlight">{{ feature().highlight }}</blockquote>
+
+    <p class="scene__progress" aria-hidden="true">{{ progressLabel() }}</p>
+
+    <details class="scene__more">
+      <summary>Ver todos los detalles</summary>
+      <div class="scene__more-content">
+        @if (feature().longDescription) {
+          <p class="scene__more-text">{{ feature().longDescription }}</p>
+        }
+
+        @if (feature().detailedCapabilities; as detailed) {
+          <h4 class="scene__more-title">Todas las capacidades</h4>
+          <ul class="scene__more-list">
+            @for (item of detailed; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        }
+
+        @if (feature().workflow; as workflow) {
+          <h4 class="scene__more-title">Flujo de uso</h4>
+          <ol class="scene__more-workflow">
+            @for (item of workflow; track item) {
+              <li>{{ item }}</li>
+            }
+          </ol>
+        }
+
+        @if (feature().technicalNote; as note) {
+          <h4 class="scene__more-title">Nota técnica</h4>
+          <p class="scene__more-note">{{ note }}</p>
+        }
+
+        @if (feature().linkLabel && feature().linkTarget) {
+          <app-button variant="secondary" size="md" [routerLink]="[feature().linkTarget!]">
+            {{ feature().linkLabel }}
+          </app-button>
+        }
+      </div>
+    </details>
+  </div>
+</article>

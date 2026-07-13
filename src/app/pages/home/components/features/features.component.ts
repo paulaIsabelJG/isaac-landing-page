@@ -1,65 +1,70 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import {
-  LucideAudioLines,
-  LucideBrainCircuit,
-  LucideChartNoAxesCombined,
-  LucideCheck,
-  LucideDynamicIcon,
-  LucideLayoutGrid,
-  LucideShare2,
-  LucideUserRoundCog,
-  type LucideIconInput,
-} from '@lucide/angular';
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  afterNextRender,
+  computed,
+  inject,
+  signal,
+  viewChildren,
+} from '@angular/core';
 import { SectionTitleComponent } from '../../../../shared/components/section-title/section-title.component';
-import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
-import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
-import { FeatureDetailComponent } from './feature-detail/feature-detail.component';
+import { FeatureSceneComponent } from './feature-scene/feature-scene.component';
+import { FeatureVisualComponent } from './feature-visual/feature-visual.component';
 import { features } from '../../../../data/features.data';
 import type { Feature } from '../../../../models/feature.model';
 
-// Mapa local: los iconos llegan como string desde data/features.data.ts.
-const FEATURE_ICONS: Record<string, LucideIconInput> = {
-  'layout-grid': LucideLayoutGrid,
-  'user-round-cog': LucideUserRoundCog,
-  'brain-circuit': LucideBrainCircuit,
-  'audio-lines': LucideAudioLines,
-  'chart-no-axes-combined': LucideChartNoAxesCombined,
-  'share-2': LucideShare2,
-};
+// Solo la franja central del viewport activa el cambio de escena: evita
+// que la funcionalidad activa cambie de un lado a otro al cruzar los
+// bordes superior/inferior mientras el usuario hace scroll.
+const CENTER_ROOT_MARGIN = '-42% 0px -42% 0px';
 
 @Component({
   selector: 'app-features',
   standalone: true,
-  imports: [
-    SectionTitleComponent,
-    BadgeComponent,
-    ScrollRevealDirective,
-    LucideDynamicIcon,
-    LucideCheck,
-    FeatureDetailComponent,
-  ],
+  imports: [SectionTitleComponent, FeatureSceneComponent, FeatureVisualComponent],
   templateUrl: './features.component.html',
   styleUrl: './features.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeaturesComponent {
   protected readonly features = features;
+  protected readonly total = features.length;
 
-  private readonly activeId = signal<string>(features[0].id);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly sceneElements = viewChildren(FeatureSceneComponent, { read: ElementRef<HTMLElement> });
 
-  protected readonly activeFeature = computed<Feature>(
-    () => this.features.find((feature) => feature.id === this.activeId()) ?? this.features[0],
-  );
+  private readonly activeIndex = signal(0);
+  protected readonly activeFeature = computed<Feature>(() => this.features[this.activeIndex()]);
 
-  protected iconFor(key: string): LucideIconInput {
-    return FEATURE_ICONS[key];
+  private observer: IntersectionObserver | null = null;
+
+  constructor() {
+    afterNextRender(() => this.setupObserver());
   }
 
-  protected isActive(id: string): boolean {
-    return this.activeId() === id;
-  }
+  private setupObserver(): void {
+    const elements = this.sceneElements();
+    if (elements.length === 0 || typeof IntersectionObserver === 'undefined') {
+      return;
+    }
 
-  protected selectFeature(id: string): void {
-    this.activeId.set(id);
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const index = elements.findIndex((el) => el.nativeElement === entry.target);
+          if (index !== -1) this.activeIndex.set(index);
+        }
+      },
+      { rootMargin: CENTER_ROOT_MARGIN, threshold: 0 },
+    );
+
+    for (const element of elements) {
+      this.observer.observe(element.nativeElement);
+    }
+
+    this.destroyRef.onDestroy(() => this.observer?.disconnect());
   }
 }

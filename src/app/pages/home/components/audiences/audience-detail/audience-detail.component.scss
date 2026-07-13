@@ -3,31 +3,37 @@
 
 .audience-detail {
   @include card-base;
-  margin-top: $space-2xl;
+  // El panel debe quedar pegado al selector: nada de márgenes verticales
+  // grandes entre la acción (elegir perfil) y el resultado (este panel).
+  margin-top: $space-md;
   padding: $space-lg;
   border-width: 1px;
   border-top-width: 4px;
+  // Reserva de espacio para que el salto de altura entre perfiles (listas
+  // de distinta longitud, examples que aparecen/desaparecen) sea discreto.
+  min-height: 26rem;
 
   @include respond-to(md) {
     padding: $space-2xl;
   }
 
   // Transición: fade-out breve -> cambio de contenido -> fade-in con
-  // desplazamiento vertical de 8px (clase temporal controlada por signal,
-  // ver audience-detail.component.ts). Respeta prefers-reduced-motion
-  // porque, en ese caso, el componente ni siquiera activa la transición.
+  // desplazamiento horizontal de 10px (clase temporal controlada por
+  // signal, ver audience-detail.component.ts). Respeta prefers-reduced-
+  // motion porque, en ese caso, el componente ni siquiera activa la
+  // transición.
   .audience-detail__grid {
     transition:
-      opacity 150ms $ease-standard,
-      transform 150ms $ease-standard;
+      opacity 190ms $ease-standard,
+      transform 190ms $ease-standard;
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
 .audience-detail--transitioning .audience-detail__grid {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateX(10px);
 }
 
 // Acentos: franja superior + color del icono. El resto del contenido no
@@ -90,7 +96,8 @@
     'permissions';
 
   @include respond-to(lg) {
-    grid-template-columns: 1fr 1fr;
+    // 58% / 42%: columna de texto más ancha que la imagen, como se pidió.
+    grid-template-columns: 58fr 42fr;
     column-gap: $space-2xl;
     grid-template-areas:
       'header      image'
