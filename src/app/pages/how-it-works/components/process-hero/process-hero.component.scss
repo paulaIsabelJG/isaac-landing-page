@@ -66,11 +66,17 @@
   position: relative;
   z-index: 1;
   display: grid;
+  // Columna explícita y encogible: sin esto, una pista de grid "auto"
+  // se dimensiona por el min-content de sus hijos (p. ej. el badge largo
+  // de abajo, con white-space: nowrap), pudiendo superar el ancho del
+  // viewport aunque el contenedor tenga el padding correcto.
+  grid-template-columns: minmax(0, 1fr);
   gap: $space-2xl;
   align-items: center;
+  min-width: 0;
 
   @include respond-to(lg) {
-    grid-template-columns: 1.05fr 1fr;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     gap: $space-xl;
   }
 }
@@ -81,6 +87,7 @@
   align-items: center;
   gap: $space-md;
   text-align: center;
+  min-width: 0;
   animation: process-hero-fade-up 0.7s $ease-out both;
 
   @include respond-to(lg) {
@@ -94,6 +101,8 @@
   color: $color-text;
   margin: 0;
   max-width: 22ch;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .process-hero__description {
@@ -101,6 +110,8 @@
   color: $color-text-muted;
   margin: 0;
   max-width: 48ch;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .process-hero__actions {
@@ -109,19 +120,38 @@
   align-items: center;
   gap: $space-sm;
   margin-top: $space-xs;
+  width: 100%;
+  max-width: 100%;
 
   @include respond-to(sm) {
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   @include respond-to(lg) {
     align-items: flex-start;
+    justify-content: flex-start;
   }
 }
 
+// El texto de este badge ("Crear · Personalizar · ... · Mejorar") es mucho
+// más largo que un badge típico (p. ej. el de la home): a diferencia del
+// resto de usos de app-badge, aquí necesita poder partirse en varias
+// líneas en vez de forzar un ancho mínimo con white-space: nowrap. Se
+// sobreescribe solo en este punto de uso (::ng-deep), sin tocar
+// BadgeComponent ni el resto de badges del sitio.
 .process-hero__badge {
   margin-top: $space-2xs;
+  max-width: 100%;
+
+  ::ng-deep .badge {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+  }
 }
 
 .process-hero__visual {
@@ -131,12 +161,15 @@
   align-items: center;
   gap: $space-lg;
   padding: $space-lg;
+  min-width: 0;
+  max-width: 100%;
   animation: process-hero-fade-up 0.7s $ease-out 0.15s both;
 }
 
 .process-hero__mockup {
   width: 100%;
   max-width: 420px;
+  min-width: 0;
   background-color: $color-surface;
   border: 1px solid $color-border;
   border-radius: $radius-xl;

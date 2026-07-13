@@ -3,9 +3,9 @@ import type { Audience } from '../models/audience.model';
 export const audiences: Audience[] = [
   {
     id: 'personas-usuarias',
-    shortTitle: 'Personas usuarias',
+    shortTitle: 'Usuario final',
     title: 'Una forma más personal de expresarse',
-    shortDescription: 'Comunicar mediante pictogramas, voz y tableros personales.',
+    shortDescription: 'Comunicarse mediante pictogramas, voz y tableros personales.',
     longDescription:
       'ISAAC ofrece a la persona un comunicador visual desde el que puede seleccionar pictogramas, construir frases, navegar entre tableros y emitir el mensaje mediante voz. Los tableros pueden incorporar vocabulario e imágenes significativas para su entorno y sus rutinas.',
     icon: 'user-round',
@@ -29,8 +29,7 @@ export const audiences: Audience[] = [
       'Reproducir el mensaje mediante voz',
     ],
     highlight: 'La persona mantiene siempre el control de su mensaje.',
-    permissionsNote:
-      'Las funciones disponibles dependen de la configuración y los tableros asignados a cada usuario.',
+    permissionsNote: 'Accede a los tableros y funciones asignados por la organización.',
     imageSrc: '/images/audiences/user-communicator.webp',
     imageAlt: 'Persona utilizando el comunicador de ISAAC',
   },
@@ -62,8 +61,7 @@ export const audiences: Audience[] = [
       'Participar en el seguimiento',
     ],
     highlight: 'La comunicación no termina al salir del centro.',
-    permissionsNote:
-      'Cada familiar accede únicamente a los usuarios, datos y funciones para los que haya recibido autorización.',
+    permissionsNote: 'Acceden únicamente a los usuarios y datos autorizados.',
     imageSrc: '/images/audiences/family-personalization.webp',
     imageAlt: 'Personalización de ISAAC con imágenes y vocabulario familiar',
   },
@@ -99,7 +97,7 @@ export const audiences: Audience[] = [
     ],
     examples: ['Logopedia', 'Terapia ocupacional', 'Educación especial', 'Orientación', 'Profesionales de apoyo'],
     highlight: 'Del diseño del tablero al seguimiento, sin cambiar de herramienta.',
-    permissionsNote: 'Las funciones concretas dependen del rol y de los permisos asignados por la organización.',
+    permissionsNote: 'Sus herramientas dependen del rol configurado por la organización.',
     imageSrc: '/images/audiences/professional-board-builder.webp',
     imageAlt: 'Profesional configurando un tablero en el Board Builder de ISAAC',
   },
@@ -140,8 +138,7 @@ export const audiences: Audience[] = [
       'Determinados entornos sanitarios',
     ],
     highlight: 'Una visión común, respetando los permisos de cada perfil.',
-    permissionsNote:
-      'El acceso a datos de comunicación, estadísticas y exportaciones debe limitarse a perfiles expresamente autorizados.',
+    permissionsNote: 'Administran roles, relaciones y permisos del entorno.',
     imageSrc: '/images/audiences/organization-dashboard.webp',
     imageAlt: 'Panel de gestión de una organización en ISAAC',
   },

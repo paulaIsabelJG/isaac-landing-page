@@ -6,6 +6,7 @@ import {
   LucideChevronDown,
   LucideDynamicIcon,
   LucideHeartHandshake,
+  LucideShieldCheck,
   LucideUserRound,
   type LucideIconInput,
 } from '@lucide/angular';
@@ -36,6 +37,7 @@ const MOBILE_QUERY = '(max-width: 767px)';
     LucideDynamicIcon,
     LucideCheck,
     LucideChevronDown,
+    LucideShieldCheck,
     AudienceDetailComponent,
   ],
   templateUrl: './audiences.component.html',

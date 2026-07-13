@@ -58,6 +58,18 @@
       }
     </div>
 
+    <div class="audiences__permissions-note">
+      <svg lucideShieldCheck class="audiences__permissions-icon" aria-hidden="true"></svg>
+      <div class="audiences__permissions-text">
+        <p class="audiences__permissions-main">
+          La organización configura los permisos y el nivel de acceso de cada perfil.
+        </p>
+        <p class="audiences__permissions-sub">
+          Cada usuario accede únicamente a las funciones, personas y datos que la organización le haya asignado.
+        </p>
+      </div>
+    </div>
+
     @if (!isMobileLayout()) {
       <app-audience-detail [audience]="activeAudience()" />
     }

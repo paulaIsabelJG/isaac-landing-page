@@ -18,21 +18,23 @@
 
 .audiences__selector {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
   gap: $space-sm;
 
   @include respond-to(md) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @include respond-to(lg) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0;
   }
 }
 
 .audiences__item {
   min-width: 0;
+  height: 100%;
 }
 
 .audiences__trigger {
@@ -41,11 +43,23 @@
   @include button-reset;
   @include focus-visible;
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: $space-sm;
   width: 100%;
-  min-height: 96px;
+  height: 100%;
+  min-width: 0;
+  // Icono en columna fija + contenido en columna flexible: misma
+  // estructura para los 4 perfiles, así icono y título quedan siempre en
+  // la misma posición independientemente de la longitud del texto.
+  // align-items: start (no center) es lo que garantiza esto: si se
+  // centraran, la posición del icono dependería de la altura de SU fila,
+  // que varía según si la descripción ocupa una o dos líneas.
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  // El contenido se ancla arriba y el espacio sobrante (cuando el grid
+  // exterior estira las 4 tarjetas a la altura de la más alta) queda
+  // libre debajo, en vez de repartirse y desalinear icono/título.
+  align-content: start;
+  column-gap: $space-sm;
   padding: $space-sm $space-md;
   text-align: left;
   border: 1px solid $color-border;
@@ -57,6 +71,14 @@
     border-color $duration-fast $ease-standard,
     background-color $duration-fast $ease-standard,
     box-shadow $duration-fast $ease-standard;
+
+  // La altura mínima común solo se aplica a partir de tablet, donde varias
+  // opciones conviven en la misma fila y deben coincidir en altura. En
+  // móvil (acordeón de una columna) cada cabecera se ajusta a su propio
+  // contenido, sin una altura fija innecesaria.
+  @include respond-to(md) {
+    min-height: 140px;
+  }
 
   @include respond-to(lg) {
     border-radius: $radius-md $radius-md 0 0;
@@ -145,12 +167,16 @@
   @include type-body;
   font-weight: $font-weight-semibold;
   color: $color-text;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .audiences__desc {
   @include type-small;
   color: $color-text-muted;
   line-height: 1.35;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .audiences__active-badge {
@@ -216,6 +242,52 @@
   .audiences__indicator {
     transition: none;
   }
+}
+
+// ---------------------------------------------------------------
+// Nota general de permisos: banda compacta y discreta, no una tarjeta
+// grande. Va justo debajo del selector y antes del panel de detalle;
+// el texto (no solo el icono) es lo que transmite el significado.
+// ---------------------------------------------------------------
+.audiences__permissions-note {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-sm;
+  margin-top: $space-md;
+  padding: $space-sm $space-md;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  background-color: $color-surface;
+}
+
+.audiences__permissions-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+  color: $color-secondary;
+}
+
+.audiences__permissions-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.audiences__permissions-main {
+  @include type-small;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.audiences__permissions-sub {
+  @include type-small;
+  color: $color-text-muted;
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
 // ---------------------------------------------------------------
